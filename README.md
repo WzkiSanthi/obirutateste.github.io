@@ -1,4 +1,4 @@
-# soccerush
+# soccerrush
 
 ## Project setup
 ```
