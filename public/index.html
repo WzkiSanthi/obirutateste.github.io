@@ -1,17 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>soccerrush</title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but soccerrush doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title>SOCCER RUSH - REGISTER </title>
+  <link rel="stylesheet" type="text/css" href="css/uikit.css">
+  <link rel="stylesheet" type="text/css" href="css/bg.css">
+  <!-- UIkit JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.14/js/uikit.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.14/js/uikit-icons.min.js"></script>
+  <!--Animate Css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDwNgQ75ubKPjrZAQCbEqzfPN3fMf3oqGc",
+      authDomain: "soccerrush-150a7.firebaseapp.com",
+      databaseURL: "https://soccerrush-150a7.firebaseio.com",
+      projectId: "soccerrush-150a7",
+      storageBucket: "",
+      messagingSenderId: "1069615549970"
+    };
+    firebase.initializeApp(config);
+  </script>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but soccerrush doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+  </noscript>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+</body>
+
 </html>
