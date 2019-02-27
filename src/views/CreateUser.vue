@@ -21,9 +21,11 @@
                                 a number right after. No spaces allowed either. E.g: soccerrush#55</p>
                         </div>
                         <div class="uk-margin">
-                            <a @click="register()" v-show="!error && nickname.length" class="uk-button uk-button-success uk-border-rounded uk-margin-small-bottom"
+                            <a @click="register()" v-show="!error && nickname.length"
+                                class="uk-button uk-button-success uk-border-rounded uk-margin-small-bottom"
                                 disabled>Register</a>
-                            <button v-show="!nickname.length || error" class="uk-button uk-button-default" disabled>Register</button>
+                            <button v-show="!nickname.length || error" class="uk-button uk-button-default"
+                                disabled>Register</button>
                         </div>
                         <hr class="uk-divider-icon">
                         <div>

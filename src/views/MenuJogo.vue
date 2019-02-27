@@ -1,66 +1,94 @@
 <template>
-    <div class="uk-position-center">
-        <!-- Menu -->
+    <div>
+        <nav class="uk-navbar-container uk-box-shadow-small uk-margin">
+            <div class="uk-container">
+                <div class="uk-navbar">
+                    <div class="uk-navbar-left">
 
-        <!-- Menu Tile 1-->
-        <div class="uk-child-width-1-4 uk-position-medium  " uk-grid>
-            <div>
-                <a class="uk-link-reset">
-                    <div class="uk-card uk-card-hover uk-card-default ">
-                            <div class="uk-card-media-top uk-background-cover" style="height: 150px" :style="setTileBackground(this.tile1)"></div>
-                        <div class="uk-card-body">
-                            <h3 class="uk-card-title ">Join Room</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt.</p>
-                        </div>
+                        <a class="uk-navbar-item uk-logo" href="#">SOCCERRUSH</a>
+
                     </div>
 
-                </a></div>
-            <!--/ End Tile 1-->
+                    <div class="uk-navbar-right">
 
-            <!-- Menu Tile 2-->
-            <div>
-                <a class="uk-link-reset">
-                    <div class="uk-card uk-card-hover uk-card-default ">
-                        <div class="uk-card-media-top uk-background-cover" style="height: 150px" :style="setTileBackground(this.tile2)"></div>
-                        <div class="uk-card-body">
-                            <h3 class="uk-card-title">Created Room</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt.</p>
+                        <div class="uk-navbar-item">
+                            <ul class="uk-navbar-nav">
+
+                                <li><a @click="logout()">LOGOUT</a></li>
+                            </ul>
+                            </ul>
                         </div>
                     </div>
-
-                </a>
+                </div>
             </div>
-            <!--/ End Tile 2-->
+        </nav>
+        <div class="uk-position-center">
+            <!-- Menu -->
 
-            <!-- Menu Tile 3-->
-            <div>
-                <a class="uk-link-reset">
-                    <div class="uk-card uk-card-hover uk-card-default ">
-                            <div class="uk-card-media-top uk-background-cover" style="height: 150px" :style="setTileBackground(this.tile3)"></div>
-                        <div class="uk-card-body">
-                            <h3 class="uk-card-title">Settings</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt.</p>
+            <!-- Menu Tile 1-->
+            <div class="uk-child-width-1-4 uk-position-medium  " uk-grid>
+                <div>
+                    <a class="uk-link-reset">
+                        <div class="uk-card uk-card-hover uk-card-default ">
+                            <div class="uk-card-media-top uk-background-cover" style="height: 150px"
+                                :style="setTileBackground(this.tile1)"></div>
+                            <div class="uk-card-body">
+                                <h3 class="uk-card-title ">Join Room</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt.</p>
+                            </div>
                         </div>
-                    </div>
-                </a>
-            </div>
-            <!--/ End Tile 3-->
 
-            <!-- Menu Tile 4-->
-            <div>
-                <a class="uk-link-reset">
-                    <div class="uk-card uk-card-hover uk-card-default ">
-                            <div class="uk-card-media-top uk-background-cover" style="height: 150px" :style="setTileBackground(this.tile4)"></div>
-                        <div class="uk-card-body">
-                            <h3 class="uk-card-title ">Quit</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt.</p>
+                    </a></div>
+                <!--/ End Tile 1-->
+
+                <!-- Menu Tile 2-->
+                <div>
+                    <a class="uk-link-reset">
+                        <div class="uk-card uk-card-hover uk-card-default ">
+                            <div class="uk-card-media-top uk-background-cover" style="height: 150px"
+                                :style="setTileBackground(this.tile2)"></div>
+                            <div class="uk-card-body">
+                                <h3 class="uk-card-title">Created Room</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt.</p>
+                            </div>
                         </div>
-                    </div>
-                </a>
+
+                    </a>
+                </div>
+                <!--/ End Tile 2-->
+
+                <!-- Menu Tile 3-->
+                <div>
+                    <a class="uk-link-reset">
+                        <div class="uk-card uk-card-hover uk-card-default ">
+                            <div class="uk-card-media-top uk-background-cover" style="height: 150px"
+                                :style="setTileBackground(this.tile3)"></div>
+                            <div class="uk-card-body">
+                                <h3 class="uk-card-title">Settings</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!--/ End Tile 3-->
+
+                <!-- Menu Tile 4-->
+                <div>
+                    <a class="uk-link-reset">
+                        <div class="uk-card uk-card-hover uk-card-default ">
+                            <div class="uk-card-media-top uk-background-cover" style="height: 150px"
+                                :style="setTileBackground(this.tile4)"></div>
+                            <div class="uk-card-body">
+                                <h3 class="uk-card-title ">Quit</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -84,6 +112,14 @@
         methods: {
             setTileBackground: function (tile) {
                 return "backgroundImage: url(" + tile + ")";
+            },
+            logout: function () {
+                firebase.auth().signOut().then(() => {
+                    this.$router.push({ path: '/login' })
+                }, function (error) {
+                    // An error happened.
+                    console.log("Erro ao deslogar");
+                });
             }
         }
     }
