@@ -6,6 +6,7 @@ import MenuJogo from './views/MenuJogo.vue'
 
 Vue.use(Router)
 
+let uid = false;
 const router = new Router({
     mode: 'history',
     base: process.env.BASE_URL,
@@ -36,17 +37,18 @@ const router = new Router({
 const openRouter = ['login'];
 
 router.beforeEach((to, from, next) => {
-    if (openRouter.includes(to.name) || localStorage.getItem("auth")) {
+    if (openRouter.includes(to.name) || localStorage.getItem("auth") === uid) {
         next();
     } else {
-        next('/login');
+        next({ path: '/login', query: { redirect: to.fullPath } });
     }
 });
 
 //AUTH
 firebase.auth().onAuthStateChanged((user) => {
     //SET AUTH PARA ROTAS AUTENTICADAS
-    user ? localStorage.setItem("auth", true) : localStorage.removeItem("auth");
+    uid = user ? user.uid : false;
+    user ? localStorage.setItem("auth", user.uid) : localStorage.removeItem("auth");
 });
 
 export default router;
