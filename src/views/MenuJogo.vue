@@ -21,6 +21,30 @@
                     </div>
                 </div>
             </div>
+
+            <!-- MENU OFF-CANVAS -->
+            <div id="offcanvas-nav-primary" uk-offcanvas="overlay: true">
+    <div class="uk-offcanvas-bar uk-flex uk-flex-column">
+<button class="uk-offcanvas-close" type="button" uk-close></button>
+        <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
+            <li class="uk-active"><a href="#">League</a></li>
+            <li class="uk-parent">
+                
+                <ul class="uk-nav-sub">
+                    <li><a href="#" class="uk-text-danger uk-margin-small-right">New League</a></li>
+                    <li><a href="#" class="uk-text-success uk-margin-small-right">New Cup</a></li>
+                </ul>
+            </li>
+            <li class="uk-active"><a href="#">League Ranking</a></li>
+            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: table"></span> Item</a></li>
+            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Item</a></li>
+            <li class="uk-nav-divider"></li>
+            <li><a href="#"><span class="uk-margin-small-right"  uk-close></span> Item</a></li>
+        </ul>
+
+    </div>
+    <!-- END MENU-CANVAS-->
+</div>
         </nav>
         <div class="uk-position-center">
             <!-- Menu -->
@@ -66,7 +90,7 @@
                             <div class="uk-card-media-top uk-background-cover" style="height: 150px"
                                 :style="setTileBackground(this.tile3)"></div>
                             <div class="uk-card-body">
-                                <h3 class="uk-card-title">Settings</h3>
+                                <h3 class="uk-card-title">Profile</h3>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                                     incididunt.</p>
                             </div>
@@ -77,12 +101,12 @@
 
                 <!-- Menu Tile 4-->
                 <div>
-                    <a class="uk-link-reset">
+                    <a class="uk-link-reset" uk-toggle="target: #offcanvas-nav-primary">
                         <div class="uk-card uk-card-hover uk-card-default ">
                             <div class="uk-card-media-top uk-background-cover" style="height: 150px"
                                 :style="setTileBackground(this.tile4)"></div>
                             <div class="uk-card-body">
-                                <h3 class="uk-card-title ">Quit</h3>
+                                <h3 class="uk-card-title  ">League</h3>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                                     incididunt.</p>
                             </div>
@@ -94,10 +118,10 @@
     </div>
 </template>
 <script>
-    import Tile1 from '../assets/tile-1.jpg';
-    import Tile2 from '../assets/tile-2.jpg';
-    import Tile3 from '../assets/tile-3.jpg';
-    import Tile4 from '../assets/tile-5.jpg';
+    import Tile1 from '../assets/tile-4.jpg';
+    import Tile2 from '../assets/tile-7.jpg';
+    import Tile3 from '../assets/tile-1.jpg';
+    import Tile4 from '../assets/tile-9.jpg';
 
     export default {
         name: 'menuJogo',
