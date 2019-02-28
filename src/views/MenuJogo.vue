@@ -24,27 +24,28 @@
 
             <!-- MENU OFF-CANVAS -->
             <div id="offcanvas-nav-primary" uk-offcanvas="overlay: true">
-    <div class="uk-offcanvas-bar uk-flex uk-flex-column">
-<button class="uk-offcanvas-close" type="button" uk-close></button>
-        <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
-            <li class="uk-active"><a href="#">League</a></li>
-            <li class="uk-parent">
-                
-                <ul class="uk-nav-sub">
-                    <li><a href="#" class="uk-text-danger uk-margin-small-right">New League</a></li>
-                    <li><a href="#" class="uk-text-success uk-margin-small-right">New Cup</a></li>
-                </ul>
-            </li>
-            <li class="uk-active"><a href="#">League Ranking</a></li>
-            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: table"></span> Item</a></li>
-            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Item</a></li>
-            <li class="uk-nav-divider"></li>
-            <li><a href="#"><span class="uk-margin-small-right"  uk-close></span> Item</a></li>
-        </ul>
+                <div class="uk-offcanvas-bar uk-flex uk-flex-column">
+                    <button class="uk-offcanvas-close" type="button" uk-close></button>
+                    <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
+                        <li class="uk-active"><a href="#">League</a></li>
+                        <li class="uk-parent">
 
-    </div>
-    <!-- END MENU-CANVAS-->
-</div>
+                            <ul class="uk-nav-sub">
+                                <li><a href="#" class="uk-text-danger uk-margin-small-right">New League</a></li>
+                                <li><a href="#" class="uk-text-success uk-margin-small-right">New Cup</a></li>
+                            </ul>
+                        </li>
+                        <li class="uk-active"><a href="#">League Ranking</a></li>
+                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: table"></span> Item</a></li>
+                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Item</a>
+                        </li>
+                        <li class="uk-nav-divider"></li>
+                        <li><a href="#"><span class="uk-margin-small-right" uk-close></span> Item</a></li>
+                    </ul>
+
+                </div>
+                <!-- END MENU-CANVAS-->
+            </div>
         </nav>
         <div class="uk-position-center">
             <!-- Menu -->

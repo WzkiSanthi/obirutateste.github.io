@@ -34,9 +34,16 @@ const router = new Router({
 
 //ROTAS LIVRES DE AUTENTICAÇÃO
 const openRouter = ['login'];
+const openNicknameRoutes = ['createUser']
 
 router.beforeEach((to, from, next) => {
-    if (openRouter.includes(to.name) || localStorage.getItem("auth")) {
+    if (openRouter.includes(to.name)) {
+        next();
+    } else if (openNicknameRoutes.includes(to.name) && localStorage.getItem("auth") && !localStorage.getItem("nickname")) {
+        next();
+    } else if (localStorage.getItem("auth") && !localStorage.getItem("nickname")) {
+        next({ path: '/create-user', query: { redirect: to.fullPath } });
+    } else if (localStorage.getItem("auth") && localStorage.getItem("nickname")) {
         next();
     } else {
         next({ path: '/login', query: { redirect: to.fullPath } });

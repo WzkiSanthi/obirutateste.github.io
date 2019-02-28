@@ -66,18 +66,21 @@ C22.32,8.481,24.301,9.057,26.013,10.047z">
                 this.loading = user ? true : false;
                 //LER NICK
                 if (this.user) {
-                    firebase.database().ref('nicknames/' + this.user.uid).once('value', (snapshot) => {
-                        //SE NAO TEM NICK, MANDAR CRIAR
-                        if (!snapshot.val()) {
-                            setTimeout(() => {
-                                this.$router.push({ path: '/create-user' })
-                            }, 500);
-                        } else {
-                            setTimeout(() => {
-                                this.$router.push({ path: '/menu' })
-                            }, 500);
-                        }
-                    });
+                    firebase.firestore().collection("users").doc(this.user.uid).get()
+                        .then((querySnapshot) => {
+                            if (querySnapshot.exists) {
+                                setTimeout(() => {
+                                    this.$router.push({ path: '/menu' })
+                                }, 500);
+                            } else {
+                                setTimeout(() => {
+                                    this.$router.push({ path: '/create-user' })
+                                }, 500);
+                            }
+                        })
+                        .catch(function (error) {
+                            UIkit.notification("Error at reading data from server. Pardon! =S", { pos: 'bottom-center', status: 'danger' });
+                        });
                 }
             });
         },

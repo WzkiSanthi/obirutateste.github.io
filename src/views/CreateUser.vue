@@ -9,6 +9,7 @@
             <div>
                 <div class="uk-card-body">
                     <div class="flex-align">
+                        <h3 style="text-align: center;margin: 0">Create a nickname!</h3>
                         <div style="flex: 1"></div>
                         <hr class="uk-divider-icon">
                         <div class="uk-margin">
@@ -65,21 +66,38 @@
         },
         methods: {
             register: function () {
-                firebase.database().ref('nicknames').once('value', (snapshot) => {
-                    var nicks = snapshot.val(), temNick = false;
-                    for (var k in nicks) {
-                        temNick = nicks[k].nickname.toUpperCase() == this.nickname.toUpperCase() ? true : temNick;
-                    }
-
-                    if (temNick) {
-                        this.error = true;
-                        this.errorType = 0;
-                    } else {
-                        this.error = false;
-                        firebase.database().ref('nicknames/' + this.user.uid).set({ nickname: this.nickname });
+                let createNickname = () => {
+                    firebase.firestore().collection("users").doc(this.user.uid).set(
+                        { nickname: this.nickname }
+                    ).then(() => {
+                        localStorage.setItem("nickname", this.nickname);
                         this.$router.push({ path: '/menu' });
-                    }
-                });
+                    }).catch((error) => {
+                        UIkit.notification("Error creating nickname in the server", { pos: 'bottom-center', status: 'danger' });
+                    });
+                }
+
+                firebase.firestore().collection("users").where("nickname", "==", this.nickname).get()
+                    .then((querySnapshot) => {
+                        if (querySnapshot.docs.length) {
+                            querySnapshot.forEach((doc) => {
+                                var nickname = doc.data().nickname;
+                                if (nickname.toUpperCase() == this.nickname.toUpperCase()) {
+                                    this.error = true;
+                                    this.errorType = 0;
+                                } else {
+                                    this.error = false;
+                                    createNickname();
+                                }
+                            });
+                        } else {
+                            createNickname();
+                        }
+
+                    })
+                    .catch(function (error) {
+                        UIkit.notification("Error at reading data from server. Pardon! =S", { pos: 'bottom-center', status: 'danger' });
+                    });
             }
         },
         watch: {
