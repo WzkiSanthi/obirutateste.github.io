@@ -53,11 +53,11 @@
         <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
             
 <br>
-            <!-- Login container  user-->
+            <!-- Room Name container  -->
             <div class="uk-margin">
             <input class="uk-input uk-form-width-large" type="text" placeholder="Room Name">
         </div>
-              <!--/ End container  user-->
+              <!--/ End Room Name container -->
         <hr>
     <!-- Container password -->
 
@@ -97,11 +97,14 @@
     </div>
      <!--/ End Show in room list-->
     <hr>
-        <!-- Buttom Sign up/Register -->
-    <div class="uk-margin">
+        <!-- Buttom Create/Cancel -->
+    <div class="uk-margin uk-margin-left">
      <a href="game/in_room.html" class="uk-button uk-button-default  uk-margin-small-bottom">Create</a>
+
      <a href="index.html" class="uk-button uk-button-default  uk-margin-small-bottom ">Cancel</a>
      </div>
+
+      <!-- End Create/Cancel -->
    
         </ul>
 
