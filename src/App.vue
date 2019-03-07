@@ -11,6 +11,10 @@
         box-sizing: border-box;
     }
 
+    a:hover{
+        text-decoration: none;
+    }
+
     body {
         width: 100%;
         height: 100vh;

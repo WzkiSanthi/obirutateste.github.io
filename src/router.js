@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from './views/Login.vue'
-import CreateUser from './views/CreateUser.vue'
-import MenuJogo from './views/MenuJogo.vue'
+import Login from './views/Login'
+import CreateUser from './views/CreateUser'
+import MenuJogo from './views/MenuJogo'
+import Profile from './views/Profile'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ const router = new Router({
             path: '/menu',
             name: 'menuJogo',
             component: MenuJogo
+        },
+        {
+            path: '/profile',
+            name: 'profile',
+            component: Profile
         }
     ]
 })
