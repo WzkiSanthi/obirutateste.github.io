@@ -8,7 +8,7 @@
             </div>
             <!-- Login container  user-->
             <div>
-                <div class="uk-card-body">
+                <div class="uk-card-body uk-background-muted">
                     <div class="flex-align">
                         <div style="flex: 1"></div>
                         <!--/ End buttom Sign up/Register -->
