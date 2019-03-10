@@ -1,196 +1,223 @@
 <template>
-    <div>
-        <nav class="uk-navbar-container uk-box-shadow-small uk-margin">
-            <div class="uk-container">
-                <div class="uk-navbar">
-                    <div class="uk-navbar-left">
-                        <a class="uk-navbar-item uk-logo">SOCCERRUSH</a>
-                    </div>
-                    <div class="uk-navbar-right">
-                        <div class="uk-navbar-item">
-                            <ul class="uk-navbar-nav">
-                                <li><a @click="logout()">LOGOUT</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- End Preloader -->
+    <div class="db-smarthome page">
+        <!-- Begin Page Content -->
+        <div class="page-content">
+            <div class="content-inner boxed w-100">
+                <div class="container-fluid">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-9">
+                            <!-- Begin Header -->
+                            <header class="header">
+                                <nav class="navbar">
+                                    <!-- Begin Topbar -->
+                                    <div
+                                        class="navbar-holder d-flex align-items-center align-middle justify-content-between">
+                                        <!-- Begin Logo -->
+                                        <div class="navbar-header">
+                                            <div class="brand-image">
+                                                <img :src="logo" alt="logo" class="logo-big ">
+                                            </div>
+                                        </div>
+                                        <!-- End Logo -->
+                                        <!-- Begin Navbar Menu -->
+                                        <ul
+                                            class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center pull-right">
+                                            <!-- Begin Notifications -->
+                                            <li class="nav-item dropdown">
+                                                <a id="notifications" rel="nofollow" data-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false" class="nav-link">
+                                                    <i class="animated infinite swing ion-android-notifications"></i>
+                                                    <span class="badge-pulse"></span>
+                                                </a>
+                                                <ul aria-labelledby="notifications" class="dropdown-menu notification">
+                                                    <li>
+                                                        <div class="notifications-header-2">
+                                                            <div class="title">Notifications (4)</div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <a>
+                                                            <div class="message-icon">
+                                                                <i class="la la-unlock"></i>
+                                                            </div>
+                                                            <div class="message-body">
+                                                                <div class="message-body-heading">
+                                                                    Front door unlocked
+                                                                </div>
+                                                                <span class="date">Just now</span>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a rel="nofollow" href="#"
+                                                            class="dropdown-item all-notifications text-center">View
+                                                            All
+                                                            Notifications</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <!-- End Notifications -->
+                                            <!-- User -->
+                                            <li>
+                                                <img v-if="this.user" style="max-width: 50px"
+                                                    :src="this.user.photoURL"" alt=" ..." class="rounded-circle">
+                                            </li>
+                                            <!-- End User -->
+                                            <!-- Begin Quick Actions -->
+                                            <li class="nav-item">
+                                                <a style="cursor: pointer" @click="showSettings = true"
+                                                    class="open-sidebar"><i class="ion-android-settings"></i></a>
+                                            </li>
+                                            <!-- End Quick Actions -->
+                                        </ul>
+                                        <!-- End Navbar Menu -->
+                                    </div>
+                                    <!-- End Topbar -->
+                                </nav>
+                            </header>
+                            <!-- End Header -->
 
-            <!-- MENU OFF-CANVAS -->
-            <div id="offcanvas-nav-primary" uk-offcanvas="overlay: true">
-                <div class="uk-offcanvas-bar uk-flex uk-flex-column">
-                    <button class="uk-offcanvas-close" type="button" uk-close></button>
-                    <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
-                        <li class="uk-active"><a href="">League</a></li>
-                        <li class="uk-parent">
-                            <ul class="uk-nav-sub">
-                                <li><a href="" class="uk-text-danger uk-margin-small-right">New League</a></li>
-                                <li><a href="" class="uk-text-success uk-margin-small-right">New Cup</a></li>
-                            </ul>
-                        </li>
-                        <li class="uk-active"><a href="#">League Ranking</a></li>
-                        <li><a href=""><span class="uk-margin-small-right" uk-icon="icon: table"></span> Item</a></li>
-                        <li><a href=""><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Item</a>
-                        </li>
-                        <li class="uk-nav-divider"></li>
-                        <li><a href=""><span class="uk-margin-small-right" uk-close></span> Item</a></li>
-                    </ul>
-
-                </div>
-
-                <!-- MENU OFF-CANVAS CREATED ROOM-->
-                <div id="offcanvas-nav-primary-2" uk-offcanvas="overlay: true">
-                    <div class="uk-offcanvas-bar">
-                        <button class="uk-offcanvas-close" type="button" uk-close></button>
-                        <h3>Create Room</h3>
-                        <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
-
-                            <br>
-                            <!-- Room Name container  -->
-                            <div class="uk-margin">
-                                <input class="uk-input uk-form-width-large" type="text" placeholder="Room Name">
-                            </div>
-                            <!--/ End Room Name container -->
-                            <hr>
-                            <!-- Container password -->
-
-                            <div class="uk-margin ">
-                                <input class="uk-input uk-form-width-large" type="text" placeholder="Password">
-                            </div>
-                            <!--/ End container password -->
-                            <hr>
-                            <!-- Container Max Players -->
-                            <div class="uk-margin">
-                                <select class="uk-select " placeholder="Max Player">
-                                    <option>Max Player 01</option>
-                                    <option>02</option>
-                                    <option>03</option>
-                                    <option>04</option>
-                                    <option>05</option>
-                                    <option>06</option>
-                                    <option>07</option>
-                                    <option>08</option>
-                                    <option>09</option>
-                                    <option>10</option>
-                                    <option>11</option>
-                                    <option>12</option>
-                                </select>
-                            </div>
-                            <hr>
-                            <!--/ End Container Max Players -->
-                            <!-- Show in room list-->
-                            <div class="uk-margin">
-                                <div class="uk-form-label">Show in Room List ?</div>
-                                <div class="uk-form-controls">
-                                    <label><input class="uk-radio" type="radio" name="radio1"> Yes</label><br>
-                                    <label><input class="uk-radio" type="radio" name="radio1"> No</label>
+                            <!-- Menu  -->
+                            <div class="row">
+                                <div class="col-xl-3 col-md-4 col-sm-6" v-for="tile in tiles">
+                                    <div class="widget shadow" style="height: 350px">
+                                        <img :src="tile.image" class="card-img" alt="...">
+                                        <div class="widget-body text-center">
+                                            <h3 class="mt-3 mb-3">{{tile.name}}</h3>
+                                            <hr>
+                                            <p>{{tile.desc}}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <!--/ End Show in room list-->
-                            <hr>
-                            <!-- Buttom Create/Cancel -->
-                            <div class="uk-margin uk-margin-left">
-                                <a href="" class="uk-button uk-button-default  uk-margin-small-bottom">Create</a>
-                                <a href="" class="uk-button uk-button-default  uk-margin-small-bottom ">Cancel</a>
-                            </div>
-                            <!-- End Create/Cancel -->
-                        </ul>
+                        </div>
                     </div>
+                    <!-- Offcanvas Sidebar -->
+                    <div class="off-sidebar from-right" :class="{'is-visible': showSettings}">
+                        <div class="off-sidebar-container mini">
+                            <header class="off-sidebar-header">
+                                <a style="cursor: pointer; float: right; margin: 12px" @click="showSettings = false" class="ion-close"></a>
+                            </header>
+                            <div class="off-sidebar-content offcanvas-scroll auto-scroll">
+                                <!-- Begin Settings -->
+                                <div class="sidebar-heading text-center">Settings</div>
+                                <div class="widget-26">
+                                    <div class="q-settings">
+                                        <div class="row m-0">
+                                            <div class="col-xl-12 text-center mt-0">
+                                                <i class="ion-lightbulb"></i>
+                                                <div class="t-title">Lights</div>
+                                                <div class="mt-3">
+                                                    <label>
+                                                        <input class="toggle-checkbox-sm" type="checkbox" checked>
+                                                        <span>
+                                                            <span></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12 text-center mt-4">
+                                                <i class="ion-fireball"></i>
+                                                <div class="t-title">Gas</div>
+                                                <div class="mt-3">
+                                                    <label>
+                                                        <input class="toggle-checkbox-sm" type="checkbox">
+                                                        <span>
+                                                            <span></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12 text-center mt-4">
+                                                <i class="ion-qr-scanner"></i>
+                                                <div class="t-title">Camera</div>
+                                                <div class="mt-3">
+                                                    <label>
+                                                        <input class="toggle-checkbox-sm" type="checkbox">
+                                                        <span>
+                                                            <span></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12 text-center mt-4">
+                                                <i class="ion-radio-waves"></i>
+                                                <div class="t-title">Alarm</div>
+                                                <div class="mt-3">
+                                                    <label>
+                                                        <input class="toggle-checkbox-sm" type="checkbox" checked>
+                                                        <span>
+                                                            <span></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12 text-center mt-4">
+                                                <i class="ion-bluetooth"></i>
+                                                <div class="t-title">Bluetooth</div>
+                                                <div class="mt-3">
+                                                    <label>
+                                                        <input class="toggle-checkbox-sm" type="checkbox" checked>
+                                                        <span>
+                                                            <span></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12 text-center mt-4">
+                                                <i class="ion-music-note"></i>
+                                                <div class="t-title">Speakers</div>
+                                                <div class="mt-3">
+                                                    <label>
+                                                        <input class="toggle-checkbox-sm" type="checkbox" checked>
+                                                        <span>
+                                                            <span></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Offcanvas Container -->
+                        </div>
+                        <!-- End Offsidebar Container -->
+                    </div>
+                    <!-- End Offcanvas Sidebar -->
                 </div>
-                <!-- END MENU-CANVAS-->
-                <!-- END MENU-CANVAS-->
+                <!-- End Content -->
             </div>
-        </nav>
-        <div class="uk-position-center">
-            <!-- Menu -->
-
-            <!-- Menu Tile 1-->
-            <div class="uk-child-width-1-4 uk-position-medium  " uk-grid>
-                <div>
-                    <a class="uk-link-reset">
-                        <div class="uk-card uk-card-hover uk-card-default">
-                            <div class="uk-card-media-top uk-background-cover" style="height: 150px"
-                                :style="setTileBackground(this.tile1)"></div>
-                            <div class="uk-card-body">
-                                <h3 class="uk-card-title ">Join Room</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt.</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!--/ End Tile 1-->
-
-                <!-- Menu Tile 2-->
-                <div>
-                    <a class="uk-link-reset" uk-toggle="target: #offcanvas-nav-primary-2">
-                        <div class="uk-card uk-card-hover uk-card-default ">
-                            <div class="uk-card-media-top uk-background-cover" style="height: 150px"
-                                :style="setTileBackground(this.tile2)"></div>
-                            <div class="uk-card-body">
-                                <h3 class="uk-card-title">Created Room</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt.</p>
-                            </div>
-                        </div>
-
-                    </a>
-                </div>
-                <!--/ End Tile 2-->
-
-                <!-- Menu Tile 3-->
-                <div>
-                    <router-link to="/profile">
-                        <div class="uk-card uk-card-hover uk-card-default ">
-                            <div class="uk-card-media-top uk-background-cover" style="height: 150px"
-                                :style="setTileBackground(this.tile3)"></div>
-                            <div class="uk-card-body">
-                                <h3 class="uk-card-title">Profile</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt.</p>
-                            </div>
-                        </div>
-                    </router-link>
-                </div>
-                <!--/ End Tile 3-->
-
-                <!-- Menu Tile 4-->
-                <div>
-                    <a class="uk-link-reset" uk-toggle="target: #offcanvas-nav-primary">
-                        <div class="uk-card uk-card-hover uk-card-default ">
-                            <div class="uk-card-media-top uk-background-cover" style="height: 150px"
-                                :style="setTileBackground(this.tile4)"></div>
-                            <div class="uk-card-body">
-                                <h3 class="uk-card-title  ">League</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt.</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
+            <!-- End Page Content -->
         </div>
     </div>
 </template>
 <script>
-    import Tile1 from '../assets/tile-4.jpg';
+    import Logo from '../assets/logo-big.png';
+    import Tile1 from '../assets/tile-1.jpg';
     import Tile2 from '../assets/tile-7.jpg';
-    import Tile3 from '../assets/tile-1.jpg';
-    import Tile4 from '../assets/tile-9.jpg';
+    import Tile3 from '../assets/tile-8.jpg';
+    import Tile4 from '../assets/tile-4.jpg';
 
     export default {
         name: 'menuJogo',
         data: function () {
             return {
-                tile1: Tile1,
-                tile2: Tile2,
-                tile3: Tile3,
-                tile4: Tile4,
+                user: null,
+                showSettings: false,
+                logo: Logo,
+                tiles: [
+                    { name: "Join Room", image: Tile1, desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt." },
+                    { name: "Create Room", image: Tile2, desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt." },
+                    { name: "Profile", image: Tile3, desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt." },
+                    { name: "League/Cup", image: Tile4, desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt." },
+                ]
             }
         },
         methods: {
-            setTileBackground: function (tile) {
-                return "backgroundImage: url(" + tile + ")";
+            getImage: function (tile) {
+                return tile + "";
             },
             logout: function () {
                 firebase.auth().signOut().then(() => {
@@ -200,8 +227,16 @@
                     console.log("Erro ao deslogar");
                 });
             }
-        }
+        },
+        mounted: function () {
+            firebase.auth().onAuthStateChanged((user) => {
+                this.user = user ? user : this.user;
+            });
+        },
     }
 </script>
 <style scoped>
+    .header {
+        margin-bottom: 40px
+    }
 </style>

@@ -7,13 +7,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
   <title>SOCCER RUSH - REGISTER </title>
-  <link rel="stylesheet" type="text/css" href="css/uikit.css">
-  <link rel="stylesheet" type="text/css" href="css/bg.css">
-  <!-- UIkit JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.14/js/uikit.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.14/js/uikit-icons.min.js"></script>
-  <!--Animate Css -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <!-- Stylesheet -->
+  <!-- <link rel="stylesheet" href="css/index.css"> -->
+  <link rel="stylesheet" href="vendors/css/base/bootstrap.min.css">
+  <link rel="stylesheet" href="vendors/css/base/elisyam-1.5.min.css">
+  <link rel="stylesheet" href="icons/ionicons/css/ionicons.min.css">
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
   <script>
@@ -28,11 +26,26 @@
     };
     firebase.initializeApp(config);
   </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: { "families": ["Montserrat:400,500,600,700", "Noto+Sans:400,700"] },
+      active: function () {
+        sessionStorage.fonts = true;
+      }
+    });
+  </script>
+  <script src="vendors/js/base/jquery.min.js"></script>
+  <script src="vendors/js/base/core.min.js"></script>
+  <!-- End Vendor Js -->
+  <!-- Begin Page Vendor Js -->
+  <script src="vendors/js/app/app.min.js"></script>
 </head>
 
 <body>
   <noscript>
-    <strong>We're sorry but soccerrush doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    <strong>We're sorry but soccerrush doesn't work properly without JavaScript enabled. Please enable it to
+      continue.</strong>
   </noscript>
   <div id="app"></div>
   <!-- built files will be auto injected -->

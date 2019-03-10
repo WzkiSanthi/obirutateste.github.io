@@ -1,40 +1,44 @@
 <template>
-    <div class="uk-position-center">
-        <div class="uk-card uk-border-rounded uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
-            <div class="uk-card-media-left uk-cover-container">
-                <img src="../assets/google.gif" alt="" uk-cover>
-                <canvas width="400" height="400"></canvas>
+    <div class="container-fluid h-100 overflow-y ">
+        <div id="preloader" v-show="loading">
+            <div class="canvas">
+                <h3>Creating nickname...</h3>
+                <div class="spinner"></div>
             </div>
-            <!-- Login container  user-->
-            <div>
-                <div class="uk-card-body">
-                    <div class="flex-align">
-                        <h3 style="text-align: center;margin: 0">Create a nickname!</h3>
-                        <div style="flex: 1"></div>
-                        <hr class="uk-divider-icon">
-                        <div class="uk-margin">
-                            <input v-model="nickname" maxlength="15" class="uk-input uk-form-width-large" type="text"
-                                placeholder="Username">
+        </div>
+        <div class="row flex-row h-100">
+            <div class="col-3"></div>
+            <div class="col-6 my-auto">
+                <!-- Begin Widget -->
+                <div class="widget has-shadow">
+                    <div class="widget-body" v-if="this.user">
+                        <div class="mt-5">
+                            <img :src="this.user.photoURL" alt="..." style="width: 120px;"
+                                class="avatar rounded-circle d-block mx-auto">
                         </div>
-                        <div class="uk-alert-danger" uk-alert v-show="error">
-                            <p v-show="errorType == 0">Nickname already taken!</p>
-                            <p v-show="errorType == 1">You must use a name, a # and
-                                a number right after. No spaces allowed either. E.g: soccerrush#55</p>
+                        <h3 class="text-center mt-3 mb-1">{{this.user.displayName}}</h3>
+                        <div class="em-separator separator-dashed"></div>
+                        <form class="form-horizontal">
+                            <div class="form-group row d-flex align-items-center mb-5">
+                                <label class="col-lg-3 form-control-label">Nickname</label>
+                                <div class="col-lg-9">
+                                    <input v-model="nickname" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="text-danger" v-show="error">
+                                <p v-show="errorType == 0">Nickname already taken!</p>
+                                <p v-show="errorType == 1">You must use a name, a # and
+                                    a number right after. No spaces allowed either. E.g: soccerrush#55</p>
+                            </div>
+                        </form>
+                        <div style="display: flex">
+                            <div style="flex: 1"></div>
+                            <button @click="register()" :disabled="!nickname.length || error" type="button"
+                                class="btn btn-gradient-04 mr-1 mb-2">Register nickname</button>
                         </div>
-                        <div class="uk-margin">
-                            <a @click="register()" v-show="!error && nickname.length"
-                                class="uk-button uk-button-success uk-border-rounded uk-margin-small-bottom"
-                                disabled>Register</a>
-                            <button v-show="!nickname.length || error" class="uk-button uk-button-default"
-                                disabled>Register</button>
-                        </div>
-                        <hr class="uk-divider-icon">
-                        <div>
-                            <h5 class=" uk-text-big">Help? Contact Support</h5>
-                        </div>
-                        <div style="flex: 1"></div>
                     </div>
                 </div>
+                <!-- End Widget -->
             </div>
         </div>
     </div>
@@ -49,7 +53,8 @@
                 user: null,
                 nickname: "",
                 error: false,
-                errorType: 0
+                errorType: 0,
+                loading: false
             }
         },
         mounted: function () {
@@ -67,12 +72,17 @@
         methods: {
             register: function () {
                 let createNickname = () => {
+                    this.loading = true;
                     firebase.firestore().collection("users").doc(this.user.uid).set(
                         { nickname: this.nickname }
                     ).then(() => {
-                        localStorage.setItem("nickname", this.nickname);
-                        this.$router.push({ path: '/menu' });
+                        setTimeout(() => {
+                            this.loading = false;
+                            localStorage.setItem("nickname", this.nickname);
+                            this.$router.push({ path: '/menu' });
+                        }, 1000);
                     }).catch((error) => {
+                        this.loading = false;
                         UIkit.notification("Error creating nickname in the server", { pos: 'bottom-center', status: 'danger' });
                     });
                 }
@@ -112,13 +122,4 @@
     }
 </script>
 <style scoped>
-    .uk-card-body,
-    .flex-align {
-        height: 100%
-    }
-
-    .flex-align {
-        display: flex;
-        flex-direction: column;
-    }
 </style>
