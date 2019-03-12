@@ -11,8 +11,8 @@
                                 <div class="col-xl-3">
                                     <!-- Begin Widget -->
                                     <div class="widget has-shadow">
-                                        <div class="widget-body">
-                                            <div class="mt-5" v-if="user">
+                                        <div class="widget-body" v-if="user">
+                                            <div class="mt-5">
                                                 <img :src="user.photoURL" alt="..." style="width: 120px;"
                                                     class="avatar rounded-circle d-block mx-auto">
                                             </div>
