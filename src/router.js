@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './views/Login'
+import NotFoundPage from './views/NotFoundPage'
 import CreateUser from './views/CreateUser'
 import MenuJogo from './views/MenuJogo'
 import Profile from './views/Profile'
@@ -11,6 +12,15 @@ const router = new Router({
     mode: 'history',
     base: process.env.BASE_URL,
     routes: [
+        {
+            path: '*',
+            redirect: '/404'
+        },
+        {
+            path: '/404',
+            name: '404',
+            component: NotFoundPage
+        },
         {
             path: '/',
             redirect: '/login'
@@ -39,7 +49,7 @@ const router = new Router({
 })
 
 //ROTAS LIVRES DE AUTENTICAÇÃO
-const openRouter = ['login'];
+const openRouter = ['404', 'login'];
 const openNicknameRoutes = ['createUser']
 
 router.beforeEach((to, from, next) => {
@@ -60,6 +70,7 @@ router.beforeEach((to, from, next) => {
 firebase.auth().onAuthStateChanged((user) => {
     //SET AUTH PARA ROTAS AUTENTICADAS
     user ? localStorage.setItem("auth", user.uid) : localStorage.removeItem("auth");
+    !user ? localStorage.removeItem("nickname") : null;
 });
 
 export default router;

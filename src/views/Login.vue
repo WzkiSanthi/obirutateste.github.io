@@ -13,16 +13,20 @@
             <div class="row flex-row h-100">
                 <div class="col-12 my-auto">
                     <div class="lock-form mx-auto">
-                        <h3>Log in</h3>
+                        <div class="brand-image">
+                            <img style="width: 100%" :src="logo" alt="logo" class="logo-big ">
+                        </div>
+                        <div class="em-separator separator-dashed" style="margin-top: 0"></div>
+                        <h4 style="text-align: center">Log in with social networks</h4>
                         <div>
                             <ul class="social-network text-center mt-3">
-                                <li><a href="#" class="ico-facebook" title="Facebook">
+                                <li><a class="ico-facebook" title="Facebook">
                                         <i class="ion-social-facebook"></i></a>
                                 </li>
-                                <li><a href="#" class="ico-twitter" title="Twitter">
+                                <li><a class="ico-twitter" title="Twitter">
                                         <i class="ion-social-twitter"></i></a>
                                 </li>
-                                <li @click="googleLogin()" style="cursor: pointer">
+                                <li @click="googleLogin()">
                                     <a class="ico-danger" title="Google">
                                         <i class="ion-social-google"></i></a>
                                 </li>
@@ -35,6 +39,8 @@
     </div>
 </template>
 <script>
+    import Logo from '../assets/logo-big.png';
+
     export default {
         name: 'login',
         components: {
@@ -42,6 +48,7 @@
         data: function () {
             return {
                 user: null,
+                logo: Logo,
                 loading: false
             }
         },
@@ -87,5 +94,7 @@
     }
 </script>
 <style scoped>
-
+    a {
+        cursor: pointer
+    }
 </style>
