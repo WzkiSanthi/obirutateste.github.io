@@ -23,7 +23,7 @@ const router = new Router({
         },
         {
             path: '/',
-            redirect: '/login'
+            redirect: '/home'
         },
         {
             path: '/login',
@@ -36,8 +36,8 @@ const router = new Router({
             component: CreateUser
         },
         {
-            path: '/menu',
-            name: 'menuJogo',
+            path: '/home',
+            name: 'home',
             component: MenuJogo
         },
         {

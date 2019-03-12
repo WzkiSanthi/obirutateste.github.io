@@ -54,7 +54,7 @@
         },
         mounted: function () {
             firebase.auth().onAuthStateChanged((user) => {
-                this.user = user ? user : this.user;
+                this.user = user;
                 this.loading = user ? true : false;
                 //LER NICK
                 if (this.user) {
@@ -63,7 +63,7 @@
                             if (querySnapshot.exists && querySnapshot.data().nickname) {
                                 localStorage.setItem("nickname", querySnapshot.data().nickname);
                                 setTimeout(() => {
-                                    this.$router.push({ path: '/menu' })
+                                    this.$router.push({ path: '/' })
                                 }, 500);
                             } else {
                                 setTimeout(() => {

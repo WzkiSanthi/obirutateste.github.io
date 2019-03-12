@@ -14,7 +14,7 @@
                 <div class="row align-items-center">
                     <div class="col-xl-4 col-2"></div>
                     <div class="col-xl-4 col-3 d-flex justify-content-center">
-                        <router-link to="/menu">
+                        <router-link to="/">
                             <div class="navbar-header">
                                 <a class="navbar-brand">
                                     <div class="brand-image">
@@ -66,18 +66,21 @@
                             <li class="nav-item dropdown">
                                 <a id="user" rel="nofollow" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false" class="nav-link">
-                                    <img v-if="this.user" style="max-width: 50px" :src="this.user.photoURL"" alt=" ..."
+                                    <img v-if="user" style="max-width: 40px" :src="user.photoURL" alt=" ..."
                                         class="rounded-circle">
                                 </a>
                                 <ul aria-labelledby="user" class="user-size dropdown-menu">
                                     <li class="welcome" v-if="this.user" style="text-align: center">
-                                        <img style="max-width: 150px" :src="this.user.photoURL" class="rounded-circle">
+                                        <img style="max-width: 150px" :src="user.photoURL" class="rounded-circle">
                                         <div>{{this.user.displayName}}</div>
-                                        <div style="opacity: 0.8">{{this.nickname}}</div>
+                                        <div style="color: #5d5386">{{this.nickname}}</div>
                                     </li>
                                     <div class="em-separator separator-dashed" style="margin: 10px 0">
                                     </div>
-                                    <li style="text-align: right">
+                                    <li class="" style="text-align: right">
+                                        <router-link to="/profile" class="dropdown-item">
+                                                Profile
+                                        </router-link>
                                         <a class="dropdown-item" @click="logout()">
                                             Logout
                                         </a>
@@ -127,7 +130,7 @@
     }
 </script>
 <style scoped>
-    a{
+    a {
         cursor: pointer
     }
 </style>

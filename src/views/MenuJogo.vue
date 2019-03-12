@@ -10,14 +10,16 @@
                         <div class="col-xl-11">
                             <div class="row">
                                 <div class="col-xl-3 col-md-4 col-sm-6" v-for="tile in tiles">
-                                    <div class="widget shadow" style="height: 350px">
-                                        <img :src="tile.image" class="card-img" alt="...">
-                                        <div class="widget-body text-center">
-                                            <h3 class="mt-3 mb-3">{{tile.name}}</h3>
-                                            <hr>
-                                            <p>{{tile.desc}}</p>
+                                    <router-link :to="tile.route">
+                                        <div class="widget shadow" style="height: 350px">
+                                            <img :src="tile.image" class="card-img" alt="...">
+                                            <div class="widget-body text-center">
+                                                <h3 class="mt-3 mb-3">{{tile.name}}</h3>
+                                                <hr>
+                                                <p>{{tile.desc}}</p>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </router-link>
                                 </div>
                             </div>
                         </div>
@@ -42,14 +44,11 @@
         },
         data: function () {
             return {
-                user: null,
-                nickname: localStorage.getItem("nickname") ? localStorage.getItem("nickname") : null,
-                logo: Logo,
                 tiles: [
-                    { name: "Join Room", image: Tile1, desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt." },
-                    { name: "Create Room", image: Tile2, desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt." },
-                    { name: "Profile", image: Tile3, desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt." },
-                    { name: "League/Cup", image: Tile4, desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt." },
+                    { route: '/', name: "Join Room", image: Tile1, desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt." },
+                    { route: '/', name: "Create Room", image: Tile2, desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt." },
+                    { route: '/profile', name: "Profile", image: Tile3, desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt." },
+                    { route: '/', name: "League/Cup", image: Tile4, desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt." },
                 ]
             }
         }
@@ -61,6 +60,7 @@
     }
 
     a {
-        cursor: pointer
+        cursor: pointer;
+        color: black;
     }
 </style>

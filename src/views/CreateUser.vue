@@ -63,7 +63,7 @@
                 if (this.user) {
                     firebase.database().ref('nicknames/' + this.user.uid).once('value', (snapshot) => {
                         if (snapshot.val()) {
-                            this.$router.push({ path: '/menu' });
+                            this.$router.push({ path: '/' });
                         }
                     });
                 }
@@ -79,7 +79,7 @@
                         setTimeout(() => {
                             this.loading = false;
                             localStorage.setItem("nickname", this.nickname);
-                            this.$router.push({ path: '/menu' });
+                            this.$router.push({ path: '/' });
                         }, 1000);
                     }).catch((error) => {
                         this.loading = false;

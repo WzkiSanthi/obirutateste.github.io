@@ -8,7 +8,7 @@
                     <h1 class="text-gradient-03">404</h1>
                     <h2>This page cannot be found! </h2>
                     <p>But we have lots of other pages for you to see. </p>
-                    <router-link to="/menu">
+                    <router-link to="/">
                         <a href="#" class="btn btn-gradient-01">
                             Go Back
                         </a>
