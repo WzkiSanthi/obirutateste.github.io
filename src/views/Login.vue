@@ -39,6 +39,7 @@
     </div>
 </template>
 <script>
+    import StateStore from '../store';
     import Logo from '../assets/logo-big.png';
 
     export default {
@@ -47,40 +48,23 @@
         },
         data: function () {
             return {
-                user: null,
+                stateStore: StateStore,
                 logo: Logo,
                 loading: false
             }
         },
-        mounted: function () {
-            firebase.auth().onAuthStateChanged((user) => {
-                this.user = user;
-                this.loading = user ? true : false;
-                //LER NICK
-                if (this.user) {
-                    firebase.firestore().collection("users").doc(this.user.uid).get()
-                        .then((querySnapshot) => {
-                            if (querySnapshot.exists && querySnapshot.data().nickname) {
-                                localStorage.setItem("nickname", querySnapshot.data().nickname);
-                                setTimeout(() => {
-                                    this.$router.push({ path: '/' })
-                                }, 500);
-                            } else {
-                                setTimeout(() => {
-                                    this.$router.push({ path: '/create-user' })
-                                }, 500);
-                            }
-                        })
-                        .catch(function (error) {
-                            UIkit.notification("Error at reading data from server. Pardon! =S", { pos: 'bottom-center', status: 'danger' });
-                        });
-                }
-            });
+        computed: {
+            isAuth() {
+                return this.stateStore.getters.isAuth;
+            },
+            getNickname() {
+                return this.stateStore.getters.getNickname;
+            }
         },
         methods: {
             googleLogin: function () {
                 var provider = new firebase.auth.GoogleAuthProvider();
-                firebase.auth().signInWithPopup(provider).then(function (result) {
+                firebase.auth().signInWithPopup(provider).then((result) => {
                     var token = result.credential.accessToken;
                     var user = result.user;
                 }).catch(function (error) {
@@ -89,6 +73,22 @@
                     var email = error.email;
                     var credential = error.credential;
                 });
+            }
+        },
+        watch: {
+            isAuth: function (val) {
+                this.loading = val;
+            },
+            getNickname: function (val, oldval) {
+                if (val) {
+                    setTimeout(() => {
+                        this.$router.push({ path: '/' })
+                    }, 500);
+                } else {
+                    setTimeout(() => {
+                        this.$router.push({ path: '/create-user' })
+                    }, 500);
+                }
             }
         }
     }

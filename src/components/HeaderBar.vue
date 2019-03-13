@@ -66,20 +66,21 @@
                             <li class="nav-item dropdown">
                                 <a id="user" rel="nofollow" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false" class="nav-link">
-                                    <img v-if="user" style="max-width: 40px" :src="user.photoURL" alt=" ..."
-                                        class="rounded-circle">
+                                    <img v-if="stateStore.state.user" style="max-width: 40px"
+                                        :src="stateStore.state.user.photoURL" alt=" ..." class="rounded-circle">
                                 </a>
                                 <ul aria-labelledby="user" class="user-size dropdown-menu">
-                                    <li class="welcome" v-if="this.user" style="text-align: center">
-                                        <img style="max-width: 150px" :src="user.photoURL" class="rounded-circle">
-                                        <div>{{this.user.displayName}}</div>
-                                        <div style="color: #5d5386">{{this.nickname}}</div>
+                                    <li class="welcome" v-if="stateStore.state.user" style="text-align: center">
+                                        <img style="max-width: 150px" :src="stateStore.state.user.photoURL"
+                                            class="rounded-circle">
+                                        <div>{{this.stateStore.state.user.displayName}}</div>
+                                        <div style="color: #5d5386">{{this.stateStore.state.nickname}}</div>
                                     </li>
                                     <div class="em-separator separator-dashed" style="margin: 10px 0">
                                     </div>
                                     <li class="" style="text-align: right">
                                         <router-link to="/profile" class="dropdown-item">
-                                                Profile
+                                            Profile
                                         </router-link>
                                         <a class="dropdown-item" @click="logout()">
                                             Logout
@@ -99,6 +100,7 @@
     </header>
 </template>
 <script>
+    import Store from '../store';
     import Logo from '../assets/logo-big.png';
 
     export default {
@@ -107,25 +109,14 @@
         },
         data: function () {
             return {
-                user: null,
-                nickname: localStorage.getItem("nickname"),
+                stateStore: Store,
                 logo: Logo,
             }
         },
         methods: {
             logout: function () {
-                firebase.auth().signOut().then(() => {
-                    this.$router.push({ path: '/login' })
-                }, function (error) {
-                    // An error happened.
-                    console.log("Erro ao deslogar");
-                });
+                this.stateStore.dispatch('logout');
             }
-        },
-        mounted: function () {
-            firebase.auth().onAuthStateChanged((user) => {
-                this.user = user ? user : this.user;
-            });
         },
     }
 </script>

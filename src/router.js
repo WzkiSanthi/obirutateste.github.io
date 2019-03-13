@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import Store from './store';
 import Router from 'vue-router'
 import Login from './views/Login'
 import NotFoundPage from './views/NotFoundPage'
@@ -66,11 +67,6 @@ router.beforeEach((to, from, next) => {
     }
 });
 
-//AUTH
-firebase.auth().onAuthStateChanged((user) => {
-    //SET AUTH PARA ROTAS AUTENTICADAS
-    user ? localStorage.setItem("auth", user.uid) : localStorage.removeItem("auth");
-    !user ? localStorage.removeItem("nickname") : null;
-});
+Store.dispatch('setup', router);
 
 export default router;

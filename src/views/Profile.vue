@@ -11,17 +11,21 @@
                                 <div class="col-xl-3">
                                     <!-- Begin Widget -->
                                     <div class="widget has-shadow">
-                                        <div class="widget-body" v-if="user">
+                                        <div class="widget-body" v-if="stateStore.state.user">
                                             <div class="mt-5">
-                                                <img :src="user.photoURL" alt="..." style="width: 120px;"
+                                                <img :src="stateStore.state.user.photoURL" alt="..." style="width: 120px;"
                                                     class="avatar rounded-circle d-block mx-auto">
                                             </div>
-                                            <h3 class="text-center mt-3 mb-1">{{this.user.displayName}}</h3>
-                                            <h4 class="text-center" style="color: #000">{{this.nickname}}</h4>
+                                            <h3 class="text-center mt-3 mb-1">{{this.stateStore.state.user.displayName}}
+                                            </h3>
+                                            <h4 class="text-center" style="color: #000">
+                                                {{this.stateStore.state.nickname}}</h4>
                                             <div class="em-separator separator-dashed"></div>
                                             <ul class="nav flex-column">
                                                 <li class="nav-item" v-for="(option, index) in sidebarOptions">
-                                                    <a class="nav-link" :class="{'nav-link-active': sidebarIndex == index}" @click="sidebarIndex = option.id">
+                                                    <a class="nav-link"
+                                                        :class="{'nav-link-active': sidebarIndex == index}"
+                                                        @click="sidebarIndex = option.id">
                                                         <i :class="[option.icon]"></i>
                                                         <span style="text-transform: capitalize">{{option.name}}</span>
                                                     </a>
@@ -51,6 +55,7 @@
 </template>
 <script>
     import HeaderBar from '../components/HeaderBar';
+    import StateStore from '../store';
 
     export default {
         name: 'profile',
@@ -59,8 +64,7 @@
         },
         data: function () {
             return {
-                user: null,
-                nickname: localStorage.getItem('nickname'),
+                stateStore: StateStore,
                 sidebarIndex: 0,
                 sidebarOptions: [
                     { name: 'account settings', icon: 'ion-android-person', id: 0 },
