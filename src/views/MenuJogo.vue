@@ -31,7 +31,6 @@
 </template>
 <script>
     import HeaderBar from '../components/HeaderBar';
-    import Logo from '../assets/logo-big.png';
     import Tile1 from '../assets/tile-1.jpg';
     import Tile2 from '../assets/tile-7.jpg';
     import Tile3 from '../assets/tile-8.jpg';
@@ -45,8 +44,8 @@
         data: function () {
             return {
                 tiles: [
-                    { route: '/', name: "Join Room", image: Tile1, desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt." },
-                    { route: '/', name: "Create Room", image: Tile2, desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt." },
+                    { route: '/join-room', name: "Join Room", image: Tile1, desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt." },
+                    { route: '/create-room', name: "Create Room", image: Tile2, desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt." },
                     { route: '/profile', name: "Profile", image: Tile3, desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt." },
                     { route: '/', name: "League/Cup", image: Tile4, desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt." },
                 ]

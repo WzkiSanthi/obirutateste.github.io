@@ -67,8 +67,8 @@
                 stateStore: StateStore,
                 sidebarIndex: 0,
                 sidebarOptions: [
-                    { name: 'account settings', icon: 'ion-android-person', id: 0 },
-                    { name: 'settings', icon: 'ion-android-settings', id: 1 }
+                    { name: 'account settings', icon: 'ion-md-person', id: 0 },
+                    { name: 'settings', icon: 'ion-md-settings', id: 1 }
                 ]
             }
         },

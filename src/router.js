@@ -6,6 +6,8 @@ import NotFoundPage from './views/NotFoundPage'
 import CreateUser from './views/CreateUser'
 import MenuJogo from './views/MenuJogo'
 import Profile from './views/Profile'
+import CreateRoom from './views/CreateRoom'
+import JoinRoom from './views/JoinRoom'
 
 Vue.use(Router)
 
@@ -45,6 +47,16 @@ const router = new Router({
             path: '/profile',
             name: 'profile',
             component: Profile
+        },
+        {
+            path: '/create-room',
+            name: 'createRoom',
+            component: CreateRoom
+        },
+        {
+            path: '/join-room',
+            name: 'joinRoom',
+            component: JoinRoom
         }
     ]
 })
