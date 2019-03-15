@@ -11,15 +11,15 @@
                                 <div class="col-xl-3">
                                     <!-- Begin Widget -->
                                     <div class="widget has-shadow">
-                                        <div class="widget-body" v-if="stateStore.state.user">
+                                        <div class="widget-body" v-if="$store.getters.USER">
                                             <div class="mt-5">
-                                                <img :src="stateStore.state.user.photoURL" alt="..." style="width: 120px;"
+                                                <img :src="$store.getters.USER.photoURL" alt="..." style="width: 120px;"
                                                     class="avatar rounded-circle d-block mx-auto">
                                             </div>
-                                            <h3 class="text-center mt-3 mb-1">{{this.stateStore.state.user.displayName}}
+                                            <h3 class="text-center mt-3 mb-1">{{this.$store.getters.USER.displayName}}
                                             </h3>
                                             <h4 class="text-center" style="color: #000">
-                                                {{this.stateStore.state.nickname}}</h4>
+                                                {{this.$store.getters.NICKNAME}}</h4>
                                             <div class="em-separator separator-dashed"></div>
                                             <ul class="nav flex-column">
                                                 <li class="nav-item" v-for="(option, index) in sidebarOptions">
@@ -55,7 +55,6 @@
 </template>
 <script>
     import HeaderBar from '../components/HeaderBar';
-    import StateStore from '../store';
 
     export default {
         name: 'profile',
@@ -64,7 +63,6 @@
         },
         data: function () {
             return {
-                stateStore: StateStore,
                 sidebarIndex: 0,
                 sidebarOptions: [
                     { name: 'account settings', icon: 'ion-md-person', id: 0 },

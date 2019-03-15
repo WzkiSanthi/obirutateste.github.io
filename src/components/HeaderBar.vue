@@ -11,7 +11,7 @@
             <!-- End Search Box-->
             <!-- Begin Topbar -->
             <div class="navbar-holder">
-                <div class="container-fluid"  style="padding: 0 12px">
+                <div class="container-fluid" style="padding: 0 12px">
                     <div class="row align-items-center">
                         <div class="justify-content-center" style="display: flex;flex: 1">
                             <router-link to="/">
@@ -64,15 +64,15 @@
                                 <li class="nav-item dropdown">
                                     <a id="user" rel="nofollow" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false" class="nav-link">
-                                        <img v-if="stateStore.state.user" style="max-width: 40px"
-                                            :src="stateStore.state.user.photoURL" alt=" ..." class="rounded-circle">
+                                        <img v-if="$store.getters.USER" style="max-width: 40px"
+                                            :src="$store.getters.USER.photoURL" alt=" ..." class="rounded-circle">
                                     </a>
                                     <ul aria-labelledby="user" class="user-size dropdown-menu">
-                                        <li class="welcome" v-if="stateStore.state.user" style="text-align: center">
-                                            <img style="max-width: 150px" :src="stateStore.state.user.photoURL"
+                                        <li class="welcome" v-if="$store.getters.USER" style="text-align: center">
+                                            <img style="max-width: 150px" :src="$store.state.user.photoURL"
                                                 class="rounded-circle">
-                                            <div>{{this.stateStore.state.user.displayName}}</div>
-                                            <div style="color: #5d5386">{{this.stateStore.state.nickname}}</div>
+                                            <div>{{this.$store.getters.USER.displayName}}</div>
+                                            <div style="color: #5d5386">{{this.$store.getters.NICKNAME}}</div>
                                         </li>
                                         <div class="em-separator separator-dashed" style="margin: 10px 0">
                                         </div>
@@ -99,20 +99,15 @@
     </header>
 </template>
 <script>
-    import Store from '../store';
-
     export default {
         name: 'headerBar',
         components: {
         },
-        data: function () {
-            return {
-                stateStore: Store
-            }
-        },
         methods: {
             logout: function () {
-                this.stateStore.dispatch('logout');
+                this.$store.dispatch('logout').then(() => {
+                    this.$router.push({ path: '/login' });
+                });
             }
         },
     }

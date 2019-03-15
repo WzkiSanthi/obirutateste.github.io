@@ -41,7 +41,6 @@
     </div>
 </template>
 <script>
-    import StateStore from '../store';
     import HeaderBar from '../components/HeaderBar';
 
     export default {
@@ -51,7 +50,6 @@
         },
         data: function () {
             return {
-                stateStore: StateStore,
                 rooms: [
                     { name: 'tamo brotando', players: '1/4', pass: 'yes', distance: '100km' },
                     { name: 'Just chillin', players: '1/2', pass: 'no', distance: '15460km' },

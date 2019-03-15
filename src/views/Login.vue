@@ -1,34 +1,32 @@
 <template>
-    <div style="height: 100%">
-        <!-- Begin Preloader -->
-        <div id="preloader" v-show="loading">
-            <div class="canvas">
-                <h3>Loging In</h3>
-                <div class="spinner"></div>
-            </div>
-        </div>
-        <!-- End Preloader -->
-        <!-- Begin Section -->
+    <div style="height: 100%" :style="splashImage()">
         <div class="container-fluid h-100 overflow-y ">
             <div class="row flex-row h-100">
                 <div class="col-12 my-auto">
-                    <div class="lock-form mx-auto">
-                        <div class="text-center text-gradient-01 brand-style" style="font-size: 2.5em;margin-bottom: 10px">soccerrush</div>
-                        <div class="em-separator separator-dashed" style="margin-top: 0"></div>
-                        <h4 class="text-center">Log in with social networks</h4>
-                        <div>
-                            <ul class="social-network text-center mt-3">
-                                <li><a class="ico-facebook" title="Facebook">
-                                        <i class="ion-logo-facebook"></i></a>
-                                </li>
-                                <li><a class="ico-twitter" title="Twitter">
-                                        <i class="ion-logo-twitter"></i></a>
-                                </li>
-                                <li @click="googleLogin()">
-                                    <a class="ico-google" title="Google">
-                                        <i class="ion-logo-google"></i></a>
-                                </li>
-                            </ul>
+                    <div class="lock-form mx-auto"
+                        style="display: flex;flex-direction: column;width: auto;max-width: 100%;padding: 0">
+                        <div class="login-ad">
+                            <img :src="ad" />
+                        </div>
+                        <div style="margin: 4em 0">
+                            <div class="text-center text-gradient-01 brand-style"
+                                style="font-size: 2.5em;margin-bottom: 4px">soccerrush</div>
+                            <div class="em-separator separator-dashed" style="margin: 0px 0 12px 0"></div>
+                            <h4 style="margin-top: 4px" class="text-center">Log in with social networks</h4>
+                            <div>
+                                <ul class="social-network text-center mt-3">
+                                    <li><a class="ico-facebook" title="Facebook">
+                                            <i class="ion-logo-facebook"></i></a>
+                                    </li>
+                                    <li><a class="ico-twitter" title="Twitter">
+                                            <i class="ion-logo-twitter"></i></a>
+                                    </li>
+                                    <li @click="googleLogin()">
+                                        <a class="ico-google" title="Google">
+                                            <i class="ion-logo-google"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -37,7 +35,8 @@
     </div>
 </template>
 <script>
-    import StateStore from '../store';
+    import Splash from '../assets/splash-image.jpg';
+    import Adidas from '../assets/adidas1.gif';
 
     export default {
         name: 'login',
@@ -45,16 +44,16 @@
         },
         data: function () {
             return {
-                stateStore: StateStore,
+                ad: Adidas,
                 loading: false
             }
         },
         computed: {
-            isAuth() {
-                return this.stateStore.getters.isAuth;
+            Auth() {
+                return this.$store.getters.AUTH;
             },
-            getNickname() {
-                return this.stateStore.getters.getNickname;
+            Nickname() {
+                return this.$store.getters.NICKNAME;
             }
         },
         methods: {
@@ -69,13 +68,19 @@
                     var email = error.email;
                     var credential = error.credential;
                 });
+            },
+            splashImage: function () {
+                return 'background-size: cover;background-position: center center;background-image: url(' + Splash + ')';
             }
         },
         watch: {
-            isAuth: function (val) {
-                this.loading = val;
+            Auth: function (val) {
+                if (val) {
+                    this.$store.dispatch('set_loading', 'Logging in');
+                }
             },
-            getNickname: function (val, oldval) {
+            Nickname: function (val, oldval) {
+                this.$store.dispatch('unset_loading');
                 if (val) {
                     setTimeout(() => {
                         this.$router.push({ path: '/' })
@@ -92,5 +97,16 @@
 <style scoped>
     a {
         cursor: pointer
+    }
+
+    .login-ad {
+        width: 300px;
+        height: 250px;
+        overflow: hidden;
+        margin: 8px;
+    }
+
+    .login-ad img {
+        height: 100%;
     }
 </style>

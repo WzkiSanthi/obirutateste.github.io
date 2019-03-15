@@ -7,34 +7,54 @@ Vue.use(Vuex)
 
 var store = new Vuex.Store({
     state: {
-        router: null,
         user: null,
-        nickname: null
+        nickname: null,
+        loading: {
+            message: '',
+            status: false
+        }
     },
     getters: {
-        isAuth(state) {
+        AUTH(state) {
             return state.user ? true : false;
         },
-        getNickname(state) {
+        USER(state) {
+            return state.user;
+        },
+        NICKNAME(state) {
             return state.nickname;
+        },
+        LOADING(state) {
+            return state.loading;
         }
     },
     mutations: {
-        setUser(state, data) {
+        UNSET_LOADING(state) {
+            state.loading.status = false;
+        },
+        SET_LOADING(state, message) {
+            state.loading.status = true;
+            state.loading.message = message;
+        },
+        SET_USER(state, data) {
             //SETAR USUARIO
             state.user = data;
             state.user ? localStorage.setItem("auth", state.user.uid) : localStorage.removeItem("auth");
             //SETAR NICK
             state.nickname = state.user ? state.nickname : null;
             !state.user ? localStorage.removeItem("nickname") : null;
-            this.commit('setNickname');
+            this.commit('CHECK_NICKNAME');
         },
-        setNickname(state) {
+        SET_NICKNAME(state, nickname) {
+            state.nickname = nickname;
+        },
+        CHECK_NICKNAME(state) {
             if (state.user) {
                 firebase.firestore().collection("users").doc(state.user.uid).get()
                     .then((querySnapshot) => {
-                        this.state.nickname = querySnapshot.exists && querySnapshot.data().nickname ?
+                        var nickname = querySnapshot.exists && querySnapshot.data().nickname ?
                             querySnapshot.data().nickname : state.nickname;
+                        this.commit('SET_NICKNAME', nickname);
                         if (this.state.nickname) {
                             localStorage.setItem("nickname", state.nickname);
                         }
@@ -47,18 +67,27 @@ var store = new Vuex.Store({
         },
     },
     actions: {
-        setup(context, data) {
-            //SEMPRE CHAMADO POR MAIN.JS
-            this.state.router = data;
+        auth_state_change({ commit }) {
             firebase.auth().onAuthStateChanged((user) => {
-                this.commit('setUser', user);
+                commit('SET_USER', user);
             });
         },
+        set_loading({ commit }, data) {
+            commit('SET_LOADING', data);
+        },
+        unset_loading({ commit }) {
+            setTimeout(() => {
+                commit('UNSET_LOADING');
+            }, 1000);
+        },
         logout() {
-            firebase.auth().signOut().then(() => {
-                this.state.router.push({ path: '/login' });
-            }, function (error) {
-                console.log("Erro ao deslogar");
+            return new Promise((resolve, reject) => {
+                firebase.auth().signOut().then(() => {
+                    resolve()
+                }, function (error) {
+                    reject().
+                        console.log("Erro ao deslogar");
+                });
             });
         }
     }

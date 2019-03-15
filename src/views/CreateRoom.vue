@@ -80,7 +80,6 @@
     </div>
 </template>
 <script>
-    import StateStore from '../store';
     import HeaderBar from '../components/HeaderBar';
 
     export default {
@@ -90,7 +89,6 @@
         },
         data: function () {
             return {
-                stateStore: StateStore,
                 roomSettings: {
                     name: '',
                     password: '',
