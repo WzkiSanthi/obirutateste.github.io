@@ -12,14 +12,14 @@
                                     <!-- Begin Widget -->
                                     <div class="widget has-shadow">
                                         <div class="widget-body" v-if="$store.getters.USER">
-                                            <div class="mt-5">
+                                            <div class="mt-3">
                                                 <img :src="$store.getters.USER.photoURL" alt="..." style="width: 120px;"
                                                     class="avatar rounded-circle d-block mx-auto">
                                             </div>
-                                            <h3 class="text-center mt-3 mb-1">{{this.$store.getters.USER.displayName}}
-                                            </h3>
-                                            <h4 class="text-center" style="color: #000">
-                                                {{this.$store.getters.NICKNAME}}</h4>
+                                            <h4 class="text-center mt-3 mb-1">{{this.$store.getters.USER.displayName}}
+                                            </h4>
+                                            <div class="text-center text-gradient-02">
+                                                {{this.$store.getters.NICKNAME}}</div>
                                             <div class="em-separator separator-dashed"></div>
                                             <ul class="nav flex-column">
                                                 <li class="nav-item" v-for="(option, index) in sidebarOptions">

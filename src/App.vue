@@ -34,8 +34,27 @@
         text-decoration: none;
     }
 
+    body {
+        background: #f2f3f8;
+    }
+
     #app {
         width: 100%;
         height: 100vh;
+        font-family: "Montserrat", sans-serif;
+    }
+
+    #preloader {
+        animation: fadeIn 1s;
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
     }
 </style>

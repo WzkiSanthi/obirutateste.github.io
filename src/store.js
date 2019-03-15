@@ -83,10 +83,10 @@ var store = new Vuex.Store({
         logout() {
             return new Promise((resolve, reject) => {
                 firebase.auth().signOut().then(() => {
-                    resolve()
+                    resolve();
                 }, function (error) {
-                    reject().
-                        console.log("Erro ao deslogar");
+                    reject();
+                    console.log("Erro ao deslogar");
                 });
             });
         }

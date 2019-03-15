@@ -2,10 +2,13 @@
     <header class="header">
         <nav class="navbar fixed-top">
             <!-- Begin Search Box-->
-            <div class="search-box">
-                <button class="dismiss"><i class="ion-md-close"></i></button>
-                <form id="searchForm" action="#" role="search">
-                    <input type="search" placeholder="Search something ..." class="form-control">
+            <div class="search-box" :class="[showSearch? 'search-box_open' : 'search-box_close']">
+                <button class="dismiss" @click="showSearch = false">
+                    <i class="ion-md-close"></i>
+                </button>
+                <form id="searchForm" onsubmit="return false" autocomplete="off">
+                    <input ref="searchText" v-model="searchTerm" @keyup="search($event)"
+                        placeholder="Search something and press enter" id="search-term" class="form-control">
                 </form>
             </div>
             <!-- End Search Box-->
@@ -22,75 +25,21 @@
                                 </div>
                             </router-link>
                         </div>
-                        <div>
-                            <!-- Begin Navbar Menu -->
-                            <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center pull-right"
-                                style="float: right">
-                                <!-- Begin Notifications -->
-                                <li class="nav-item dropdown">
-                                    <a id="notifications" rel="nofollow" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false" class="nav-link">
-                                        <i class="ion-md-notifications"></i>
-                                        <span class="badge-pulse"></span>
-                                    </a>
-                                    <ul aria-labelledby="notifications" class="dropdown-menu notification">
-                                        <li>
-                                            <div class="notifications-header-2">
-                                                <div class="title">Notifications (4)</div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <div class="message-icon">
-                                                    <i class="la la-unlock"></i>
-                                                </div>
-                                                <div class="message-body">
-                                                    <div class="message-body-heading">
-                                                        You just hit the 1º of your league
-                                                    </div>
-                                                    <span class="date">Just now</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a rel="nofollow" href="#"
-                                                class="dropdown-item all-notifications text-center">View
-                                                All
-                                                Notifications</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- End Notifications -->
-                                <li class="nav-item dropdown">
-                                    <a id="user" rel="nofollow" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false" class="nav-link">
-                                        <img v-if="$store.getters.USER" style="max-width: 40px"
-                                            :src="$store.getters.USER.photoURL" alt=" ..." class="rounded-circle">
-                                    </a>
-                                    <ul aria-labelledby="user" class="user-size dropdown-menu">
-                                        <li class="welcome" v-if="$store.getters.USER" style="text-align: center">
-                                            <img style="max-width: 150px" :src="$store.state.user.photoURL"
-                                                class="rounded-circle">
-                                            <div>{{this.$store.getters.USER.displayName}}</div>
-                                            <div style="color: #5d5386">{{this.$store.getters.NICKNAME}}</div>
-                                        </li>
-                                        <div class="em-separator separator-dashed" style="margin: 10px 0">
-                                        </div>
-                                        <li class="" style="text-align: right">
-                                            <router-link to="/profile" class="dropdown-item">
-                                                Profile
-                                            </router-link>
-                                            <a class="dropdown-item" @click="logout()">
-                                                Logout
-                                            </a>
-                                        </li>
-                                        <div style="padding-bottom: 10px"></div>
-                                    </ul>
-                                </li>
-                                <!-- End User -->
-                            </ul>
-                            <!-- End Navbar Menu -->
+                        <!-- Begin Navbar Menu -->
+                        <div class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center pull-right"
+                            style="float: right">
+                            <div class="nav-item d-flex align-items-center" @click="showSearch = true">
+                                <a id="search"><i class="ion-md-search"></i></a>
+                            </div>
+                            <div class="nav-item dropdown">
+                                <Notification></Notification>
+                            </div>
+                            <div class="nav-item dropdown">
+                                <HeaderUserMenu></HeaderUserMenu>
+                            </div>
+                            <!-- End User -->
                         </div>
+                        <!-- End Navbar Menu -->
                     </div>
                 </div>
             </div>
@@ -99,17 +48,37 @@
     </header>
 </template>
 <script>
+    import Notification from './Notification';
+    import HeaderUserMenu from './HeaderUserMenu';
+
     export default {
         name: 'headerBar',
         components: {
+            Notification,
+            HeaderUserMenu
         },
-        methods: {
-            logout: function () {
-                this.$store.dispatch('logout').then(() => {
-                    this.$router.push({ path: '/login' });
-                });
+        data: function () {
+            return {
+                showSearch: false,
+                searchTerm: ''
             }
         },
+        methods: {
+            search: function (e) {
+                if (e.keyCode == 13) {
+                    //DO SEARCH
+                }
+            }
+        },
+        watch: {
+            showSearch: function (val) {
+                if (val) {
+                    this.$nextTick(() => this.$refs.searchText.focus())
+                } else {
+                    this.$nextTick(() => this.$refs.searchText.blur())
+                }
+            }
+        }
     }
 </script>
 <style scoped>
@@ -118,6 +87,22 @@
     }
 </style>
 <style>
+    .search-box {
+        transition: top 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
+    }
+
+    .search-box_open {
+        top: 0;
+    }
+
+    .search-box_close {
+        top: -100%;
+    }
+
+    #search-term:focus{
+        box-shadow: 0 0 2em 0.2rem #0000002b;
+    }
+
     .brand-style {
         font-size: 1.5em;
         font-weight: bold;
