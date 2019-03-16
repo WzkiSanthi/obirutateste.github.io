@@ -9,17 +9,17 @@
                         <div class="col-xl-11">
                             <div class="row flex-row">
                                 <div class="col-xl-3">
-                                    <!-- Begin Widget -->
-                                    <div class="widget has-shadow">
-                                        <div class="widget-body" v-if="$store.getters.USER">
+                                    <Card v-if="$store.getters.USER">
+                                        <template v-slot:body>
                                             <div class="mt-3">
                                                 <img :src="$store.getters.USER.photoURL" alt="..." style="width: 120px;"
                                                     class="avatar rounded-circle d-block mx-auto">
                                             </div>
-                                            <h4 class="text-center mt-3 mb-1">{{this.$store.getters.USER.displayName}}
+                                            <h4 class="text-center mt-3 mb-1">
+                                                {{$store.getters.USER.displayName}}
                                             </h4>
                                             <div class="text-center text-gradient-02">
-                                                {{this.$store.getters.NICKNAME}}</div>
+                                                {{$store.getters.NICKNAME}}</div>
                                             <div class="em-separator separator-dashed"></div>
                                             <ul class="nav flex-column">
                                                 <li class="nav-item" v-for="(option, index) in sidebarOptions">
@@ -31,19 +31,17 @@
                                                     </a>
                                                 </li>
                                             </ul>
-                                        </div>
-                                    </div>
-                                    <!-- End Widget -->
+                                        </template>
+                                    </Card>
                                 </div>
                                 <div class="col-xl-9">
-                                    <div class="widget has-shadow">
-                                        <div class="widget-header bordered no-actions d-flex align-items-center">
-                                            <h4 style="text-transform: capitalize">{{getActiveTabName()}}</h4>
-                                        </div>
-                                        <div class="widget-body">
-
-                                        </div>
-                                    </div>
+                                    <Card>
+                                        <template v-slot:header>
+                                            <span style="text-transform: capitalize">{{getActiveTabName()}}</span>
+                                        </template>
+                                        <template v-slot:body>
+                                        </template>
+                                    </Card>
                                 </div>
                             </div>
                         </div>
@@ -55,11 +53,12 @@
 </template>
 <script>
     import HeaderBar from '../components/HeaderBar';
+    import Card from '../components/Card';
 
     export default {
         name: 'profile',
         components: {
-            HeaderBar
+            HeaderBar, Card
         },
         data: function () {
             return {

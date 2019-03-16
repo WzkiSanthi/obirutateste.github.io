@@ -6,11 +6,9 @@
                 <div class="container-fluid">
                     <div class="row justify-content-center">
                         <div class="col-10">
-                            <div class="widget shadow">
-                                <div class="widget-header bordered no-actions d-flex align-items-center">
-                                    <h4>Create Room</h4>
-                                </div>
-                                <div class="widget-body">
+                            <Card>
+                                <template v-slot:header>Create Room</template>
+                                <template v-slot:body>
                                     <form class="form-horizontal">
                                         <div class="form-group row d-flex align-items-center mb-5">
                                             <label class="col-lg-3 form-control-label">Room Name</label>
@@ -60,18 +58,14 @@
                                         <hr>
                                         <div class="widget-body" style="display: flex;">
                                             <router-link to="/">
-                                                <button type="button"
-                                                    class="btn  btn-gradient-01">Cancel</button>
+                                                <CButton gradient="1">Cancel</CButton>
                                             </router-link>
                                             <div style="flex: 1"></div>
-                                            <a>
-                                                <button type="button"
-                                                    class="btn btn-gradient-04">CREATE</button>
-                                            </a>
+                                            <CButton gradient="4">Create</CButton>
                                         </div>
                                     </form>
-                                </div>
-                            </div>
+                                </template>
+                            </Card>
                         </div>
                     </div>
                 </div>
@@ -81,11 +75,13 @@
 </template>
 <script>
     import HeaderBar from '../components/HeaderBar';
+    import Card from '../components/Card';
+    import CButton from '../components/CButton';
 
     export default {
         name: 'createRoom',
         components: {
-            HeaderBar
+            HeaderBar, Card, CButton
         },
         data: function () {
             return {

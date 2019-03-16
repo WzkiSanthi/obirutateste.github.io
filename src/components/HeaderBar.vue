@@ -26,7 +26,7 @@
                             </router-link>
                         </div>
                         <!-- Begin Navbar Menu -->
-                        <div class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center pull-right"
+                        <div class="nav-menu list-unstyled d-flex flex-md-row align-items-center pull-right"
                             style="float: right">
                             <div class="nav-item d-flex align-items-center" @click="showSearch = true">
                                 <a id="search"><i class="ion-md-search"></i></a>

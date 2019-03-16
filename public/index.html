@@ -2,56 +2,55 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-  <title>SOCCER RUSH</title>
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/elisyam-1.5.min.css">
-  <link rel="stylesheet" href="icons/ionicons/css/ionicons.min.css">
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <!-- BOOTSTRAP-->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-firestore.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyDwNgQ75ubKPjrZAQCbEqzfPN3fMf3oqGc",
-      authDomain: "soccerrush-150a7.firebaseapp.com",
-      databaseURL: "https://soccerrush-150a7.firebaseio.com",
-      projectId: "soccerrush-150a7",
-      storageBucket: "",
-      messagingSenderId: "1069615549970"
-    };
-    firebase.initializeApp(config);
-  </script>
-  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
-  <script>
-    WebFont.load({
-      google: { "families": ["Montserrat:400,500,600,700", "Noto+Sans:400,700"] },
-      active: function () {
-        sessionStorage.fonts = true;
-      }
-    });
-  </script>
-  <script src="vendors/js/base/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>SOCCER RUSH</title>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/elisyam-1.5.min.css">
+    <link rel="stylesheet" href="icons/ionicons/css/ionicons.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- BOOTSTRAP-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <!-- Firebase -->
+    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/5.8.4/firebase-firestore.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDwNgQ75ubKPjrZAQCbEqzfPN3fMf3oqGc",
+            authDomain: "soccerrush-150a7.firebaseapp.com",
+            databaseURL: "https://soccerrush-150a7.firebaseio.com",
+            projectId: "soccerrush-150a7",
+            storageBucket: "",
+            messagingSenderId: "1069615549970"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <script>
+        WebFont.load({
+            google: { "families": ["Montserrat:400,500,600,700", "Noto+Sans:400,700"] },
+            active: function () {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
 </head>
 
 <body>
-  <noscript>
-    <strong>We're sorry but soccerrush doesn't work properly without JavaScript enabled. Please enable it to
-      continue.</strong>
-  </noscript>
-  <div id="app"></div>
-  <!-- built files will be auto injected -->
+    <noscript>
+        <strong>We're sorry but soccerrush doesn't work properly without JavaScript enabled. Please enable it to
+            continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
 </body>
 
 </html>

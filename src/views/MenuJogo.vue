@@ -11,14 +11,13 @@
                             <div class="row">
                                 <div class="col-xl-3 col-md-4 col-sm-6" v-for="tile in tiles">
                                     <router-link :to="tile.route">
-                                        <div class="widget shadow" style="height: 350px">
-                                            <img :src="tile.image" class="card-img" alt="...">
-                                            <div class="widget-body text-center">
-                                                <h3 class="mt-3 mb-3">{{tile.name}}</h3>
-                                                <hr>
-                                                <p>{{tile.desc}}</p>
-                                            </div>
-                                        </div>
+                                        <Card>
+                                            <template v-slot:header>{{tile.name}}</template>
+                                            <template v-slot:image>
+                                                <img :src="tile.image" class="card-img" alt="...">
+                                            </template>
+                                            <template v-slot:body>{{tile.desc}}</template>
+                                        </Card>
                                     </router-link>
                                 </div>
                             </div>
@@ -31,6 +30,7 @@
 </template>
 <script>
     import HeaderBar from '../components/HeaderBar';
+    import Card from '../components/Card';
     import Tile1 from '../assets/tile-1.jpg';
     import Tile2 from '../assets/tile-7.jpg';
     import Tile3 from '../assets/tile-8.jpg';
@@ -39,7 +39,7 @@
     export default {
         name: 'menuJogo',
         components: {
-            HeaderBar
+            HeaderBar, Card
         },
         data: function () {
             return {

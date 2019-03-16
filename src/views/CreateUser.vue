@@ -33,8 +33,7 @@
                         </form>
                         <div style="display: flex">
                             <div style="flex: 1"></div>
-                            <button @click="register()" :disabled="!nickname.length || error" type="button"
-                                class="btn btn-gradient-04 mr-1 mb-2">Register nickname</button>
+                            <CButton @click="register()" :disabled="!nickname.length || error" gradient="4">Register nickname</CButton>
                         </div>
                     </div>
                 </div>
@@ -44,9 +43,11 @@
     </div>
 </template>
 <script>
+    import CButton from '../components/CButton';
     export default {
         name: 'createUser',
         components: {
+            CButton
         },
         data: function () {
             return {

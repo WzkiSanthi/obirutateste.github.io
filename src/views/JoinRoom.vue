@@ -6,11 +6,9 @@
                 <div class="container-fluid">
                     <div class="row justify-content-center">
                         <div class="col-10">
-                            <div class="widget shadow">
-                                <div class="widget-header bordered no-actions d-flex align-items-center">
-                                    <h4>Room List</h4>
-                                </div>
-                                <div class="widget-body">
+                            <Card>
+                                <template v-slot:header>Room List</template>
+                                <template v-slot:body>
                                     <div class="table-responsive">
                                         <table class="table mb-0">
                                             <thead>
@@ -31,8 +29,8 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
-                            </div>
+                                </template>
+                            </Card>
                         </div>
                     </div>
                 </div>
@@ -42,11 +40,12 @@
 </template>
 <script>
     import HeaderBar from '../components/HeaderBar';
+    import Card from '../components/Card';
 
     export default {
         name: 'joinRoom',
         components: {
-            HeaderBar
+            HeaderBar, Card
         },
         data: function () {
             return {
@@ -68,7 +67,7 @@
         text-transform: capitalize;
     }
 
-    .rooms:hover{
+    .rooms:hover {
         cursor: pointer;
         background: #5d53864d;
     }
