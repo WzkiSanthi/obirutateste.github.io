@@ -21,9 +21,13 @@
                                             </thead>
                                             <tbody>
                                                 <tr v-for="room in rooms" class="rooms">
-                                                    <td>{{room.name}}</td>
+                                                <td><div style="display: flex" class="align-items-center">
+                                                 <span v-if="$store.getters.USER">
+                                                    <img :src="$store.getters.USER.photoURL" alt="..." style="width: 32px;" class="avatar rounded-circle d-block mx-auto"> </span>
+                                                    <span style="margin-left: 8px">{{room.name}}</span>
+                                                           </div></td>
                                                     <td>{{room.players}}</td>
-                                                    <td>{{room.pass}}</td>
+                                                    <td><span :class="[room.pass ? 'badge-text badge-text-small success ' : 'badge-text badge-text-small danger']">{{ room.pass ? 'Yes' : 'No'}}</span></td>
                                                     <td>{{room.distance}}</td>
                                                 </tr>
                                             </tbody>
@@ -50,9 +54,9 @@
         data: function () {
             return {
                 rooms: [
-                    { name: 'tamo brotando', players: '1/4', pass: 'yes', distance: '100km' },
-                    { name: 'Just chillin', players: '1/2', pass: 'no', distance: '15460km' },
-                    { name: 'Avengers united', players: '1/4', pass: 'no', distance: '56470km' },
+                    { name: 'tamo brotandos', players: '1/4', pass: true, distance: '100km' },
+                    { name: 'Just chillin', players: '1/2', pass: false, distance: '15460km' },
+                    { name: 'Avengers united', players: '1/4', pass: false, distance: '56470km' },
                 ]
             }
         }
