@@ -45,7 +45,7 @@
     }
 
     #preloader {
-        animation: fadeIn 1s;
+        animation: fadeIn 0.25s;
     }
 
     @keyframes fadeIn {

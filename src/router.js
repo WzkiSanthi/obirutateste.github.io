@@ -82,16 +82,16 @@ router.beforeEach((to, from, next) => {
     document.title = to.meta.title;
     if (openRouter.includes(to.name)) {
         next();
-    } else if (openNicknameRoutes.includes(to.name) && localStorage.getItem("auth") && !localStorage.getItem("nickname")) {
+    } else if (openNicknameRoutes.includes(to.name) && sessionStorage.getItem("auth") && !sessionStorage.getItem("nickname")) {
         next();
-    } else if (openNicknameRoutes.includes(to.name) && localStorage.getItem("auth") && localStorage.getItem("nickname")) {
+    } else if (openNicknameRoutes.includes(to.name) && sessionStorage.getItem("auth") && sessionStorage.getItem("nickname")) {
         next({ path: '/' });
-    } else if (localStorage.getItem("auth") && !localStorage.getItem("nickname")) {
-        next({ path: '/create-user', query: { redirect: to.fullPath } });
-    } else if (localStorage.getItem("auth") && localStorage.getItem("nickname")) {
+    } else if (sessionStorage.getItem("auth") && !sessionStorage.getItem("nickname")) {
+        next({ path: '/create-user' });
+    } else if (sessionStorage.getItem("auth") && sessionStorage.getItem("nickname")) {
         next();
     } else {
-        next({ path: '/login', query: { redirect: to.fullPath } });
+        next({ path: '/login' });
     }
 });
 

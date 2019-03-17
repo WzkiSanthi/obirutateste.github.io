@@ -45,12 +45,12 @@ var store = new Vuex.Store({
         SET_USER(state, data) {
             //SETAR USUARIO
             state.user = data;
-            state.user ? localStorage.setItem("auth", state.user.uid) : localStorage.removeItem("auth");
-            !state.user ? localStorage.removeItem("nickname") : null;
+            state.user ? sessionStorage.setItem("auth", state.user.uid) : sessionStorage.removeItem("auth");
+            !state.user ? sessionStorage.removeItem("nickname") : null;
         },
         SET_NICKNAME(state, nickname) {
             state.nickname = nickname;
-            localStorage.setItem("nickname", nickname);
+            sessionStorage.setItem("nickname", nickname);
         }
     },
     actions: {
