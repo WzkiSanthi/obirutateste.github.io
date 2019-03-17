@@ -1,22 +1,15 @@
 <template>
     <div class="container-fluid h-100 overflow-y ">
-        <div id="preloader" v-show="loading">
-            <div class="canvas">
-                <h3>Creating nickname...</h3>
-                <div class="spinner"></div>
-            </div>
-        </div>
         <div class="row flex-row h-100">
             <div class="col-3"></div>
             <div class="col-6 my-auto">
-                <!-- Begin Widget -->
-                <div class="widget has-shadow">
-                    <div class="widget-body" v-if="this.user">
+                <Card>
+                    <template v-slot:body v-if="$store.getters.USER">
                         <div class="mt-5">
-                            <img :src="this.user.photoURL" alt="..." style="width: 120px;"
+                            <img :src="$store.getters.USER.photoURL" alt="..." style="width: 120px;"
                                 class="avatar rounded-circle d-block mx-auto">
                         </div>
-                        <h3 class="text-center mt-3 mb-1">{{this.user.displayName}}</h3>
+                        <h3 class="text-center mt-3 mb-1">{{$store.getters.USER.displayName}}</h3>
                         <div class="em-separator separator-dashed"></div>
                         <form class="form-horizontal">
                             <div class="form-group row d-flex align-items-center mb-5">
@@ -33,73 +26,50 @@
                         </form>
                         <div style="display: flex">
                             <div style="flex: 1"></div>
-                            <CButton @click="register()" :disabled="!nickname.length || error" gradient="4">Register nickname</CButton>
+                            <CButton @click.native="register()" :disabled="!nickname.length || error" gradient="4">
+                                Register
+                                nickname</CButton>
                         </div>
-                    </div>
-                </div>
-                <!-- End Widget -->
+                    </template>
+                </Card>
             </div>
         </div>
     </div>
 </template>
 <script>
     import CButton from '../components/CButton';
+    import Card from '../components/Card';
+
     export default {
         name: 'createUser',
         components: {
-            CButton
+            CButton, Card
         },
         data: function () {
             return {
                 user: null,
                 nickname: "",
                 error: false,
-                errorType: 0,
-                loading: false
+                errorType: 0
             }
-        },
-        mounted: function () {
-            firebase.auth().onAuthStateChanged((user) => {
-                this.user = user ? user : this.user;
-                if (this.user) {
-                    firebase.database().ref('nicknames/' + this.user.uid).once('value', (snapshot) => {
-                        if (snapshot.val()) {
-                            this.$router.push({ path: '/' });
-                        }
-                    });
-                }
-            });
         },
         methods: {
             register: function () {
                 let createNickname = () => {
-                    this.loading = true;
-                    firebase.firestore().collection("users").doc(this.user.uid).set(
-                        { nickname: this.nickname }
-                    ).then(() => {
-                        setTimeout(() => {
-                            this.loading = false;
-                            localStorage.setItem("nickname", this.nickname);
-                            this.$router.push({ path: '/' });
-                        }, 1000);
-                    }).catch((error) => {
-                        this.loading = false;
-                        UIkit.notification("Error creating nickname in the server", { pos: 'bottom-center', status: 'danger' });
+                    this.$store.dispatch('set_loading', 'Creating nickname..');
+                    this.$store.dispatch('register_nickname', this.nickname).then(() => {
+                        this.$store.dispatch('unset_loading');
+                        this.$router.push({ path: '/' });
                     });
                 }
 
-                firebase.firestore().collection("users").where("nickname", "==", this.nickname).get()
+                //PEGAR TODOS OS NICKS, COMPARANDO COM O CAMPO RAW_NICKNAME (TODO MINUSCULO, USADO APENAS PARA COMPARAÇÃO)
+                firebase.firestore().collection("users").where("raw_nickname", "==", this.nickname.toLowerCase()).get()
                     .then((querySnapshot) => {
                         if (querySnapshot.docs.length) {
                             querySnapshot.forEach((doc) => {
-                                var nickname = doc.data().nickname;
-                                if (nickname.toUpperCase() == this.nickname.toUpperCase()) {
-                                    this.error = true;
-                                    this.errorType = 0;
-                                } else {
-                                    this.error = false;
-                                    createNickname();
-                                }
+                                this.error = true;
+                                this.errorType = 0;
                             });
                         } else {
                             createNickname();

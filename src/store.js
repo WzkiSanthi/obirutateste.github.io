@@ -5,6 +5,12 @@ import Router from 'vue-router'
 Vue.use(Router)
 Vue.use(Vuex)
 
+//CÓDIGOS DE ERRO
+const CODE = {
+    0: { code: 0, message: "Problem with the conection with the server" },
+    1: { code: 1, message: "There's not a nickname bounded to this user" }
+}
+
 var store = new Vuex.Store({
     state: {
         user: null,
@@ -40,36 +46,18 @@ var store = new Vuex.Store({
             //SETAR USUARIO
             state.user = data;
             state.user ? localStorage.setItem("auth", state.user.uid) : localStorage.removeItem("auth");
-            //SETAR NICK
-            state.nickname = state.user ? state.nickname : null;
             !state.user ? localStorage.removeItem("nickname") : null;
-            this.commit('CHECK_NICKNAME');
         },
         SET_NICKNAME(state, nickname) {
             state.nickname = nickname;
-        },
-        CHECK_NICKNAME(state) {
-            if (state.user) {
-                firebase.firestore().collection("users").doc(state.user.uid).get()
-                    .then((querySnapshot) => {
-                        var nickname = querySnapshot.exists && querySnapshot.data().nickname ?
-                            querySnapshot.data().nickname : state.nickname;
-                        this.commit('SET_NICKNAME', nickname);
-                        if (this.state.nickname) {
-                            localStorage.setItem("nickname", state.nickname);
-                        }
-
-                    })
-                    .catch(function (error) {
-                        UIkit.notification("Error at reading data from server. Pardon! =S", { pos: 'bottom-center', status: 'danger' });
-                    });
-            }
-        },
+            localStorage.setItem("nickname", nickname);
+        }
     },
     actions: {
-        auth_state_change({ commit }) {
+        auth_state_change({ commit, dispatch }) {
             firebase.auth().onAuthStateChanged((user) => {
                 commit('SET_USER', user);
+                dispatch('get_nickname');
             });
         },
         set_loading({ commit }, data) {
@@ -80,13 +68,47 @@ var store = new Vuex.Store({
                 commit('UNSET_LOADING');
             }, 1000);
         },
+        get_nickname({ state, commit }) {
+            if (state.user) {
+                return new Promise((resolve, reject) => {
+                    firebase.firestore().collection("users").doc(state.user.uid).get()
+                        .then((querySnapshot) => {
+                            var nickname = querySnapshot.exists && querySnapshot.data().nickname ?
+                                querySnapshot.data().nickname : state.nickname;
+                            if (nickname) {
+                                commit('SET_NICKNAME', nickname);
+                                resolve();
+                            } else {
+                                reject(CODE['1']);
+                            }
+                        })
+                        .catch(function (error) {
+                            reject(CODE['0']);
+                            UIkit.notification(CODE['0'].message, { pos: 'bottom-center', status: 'danger' });
+                        });
+                });
+            }
+        },
+        register_nickname({ state, commit }, data) {
+            return new Promise((resolve, reject) => {
+                firebase.firestore().collection("users").doc(state.user.uid).set(
+                    { nickname: data, raw_nickname: data.toLowerCase() }
+                ).then(() => {
+                    commit('SET_NICKNAME', data);
+                    resolve();
+                }).catch((error) => {
+                    reject(CODE['0']);
+                    UIkit.notification(CODE['0'].message, { pos: 'bottom-center', status: 'danger' });
+                });
+            });
+        },
         logout() {
             return new Promise((resolve, reject) => {
                 firebase.auth().signOut().then(() => {
                     resolve();
                 }, function (error) {
-                    reject();
-                    console.log("Erro ao deslogar");
+                    reject(CODE['0']);
+                    console.log(CODE['0'].message);
                 });
             });
         }

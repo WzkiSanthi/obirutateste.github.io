@@ -7,6 +7,7 @@ import MenuJogo from './views/MenuJogo'
 import Profile from './views/Profile'
 import CreateRoom from './views/CreateRoom'
 import JoinRoom from './views/JoinRoom'
+import Room from './views/Room'
 
 Vue.use(Router)
 
@@ -63,6 +64,12 @@ const router = new Router({
             name: 'joinRoom',
             meta: { title: 'SOCCERRUSH - Join Room' },
             component: JoinRoom
+        },
+        {
+            path: '/room',
+            name: 'room',
+            meta: { title: 'SOCCERRUSH - Room' },
+            component: Room
         }
     ]
 })

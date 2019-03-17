@@ -11,7 +11,7 @@
                             <div class="row">
                                 <div class="col-xl-3 col-md-4 col-sm-6" v-for="tile in tiles">
                                     <router-link :to="tile.route">
-                                        <Card>
+                                        <Card headerCenter="true">
                                             <template v-slot:header>{{tile.name}}</template>
                                             <template v-slot:image>
                                                 <img :src="tile.image" class="card-img" alt="...">

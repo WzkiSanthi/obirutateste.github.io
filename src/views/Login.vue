@@ -51,9 +51,6 @@
         computed: {
             Auth() {
                 return this.$store.getters.AUTH;
-            },
-            Nickname() {
-                return this.$store.getters.NICKNAME;
             }
         },
         methods: {
@@ -77,18 +74,13 @@
             Auth: function (val) {
                 if (val) {
                     this.$store.dispatch('set_loading', 'Logging in');
-                }
-            },
-            Nickname: function (val, oldval) {
-                this.$store.dispatch('unset_loading');
-                if (val) {
-                    setTimeout(() => {
+                    this.$store.dispatch('get_nickname').then(() => {
+                        this.$store.dispatch('unset_loading');
                         this.$router.push({ path: '/' })
-                    }, 500);
-                } else {
-                    setTimeout(() => {
+                    }).catch(() => {
+                        this.$store.dispatch('unset_loading');
                         this.$router.push({ path: '/create-user' })
-                    }, 500);
+                    });
                 }
             }
         }

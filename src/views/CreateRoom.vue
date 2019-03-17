@@ -61,7 +61,8 @@
                                                 <CButton gradient="1">Cancel</CButton>
                                             </router-link>
                                             <div style="flex: 1"></div>
-                                            <CButton gradient="4">Create</CButton>
+                                            <CButton @click.native="createRoom()" :disabled="disableCreateButton"
+                                                gradient="4">Create</CButton>
                                         </div>
                                     </form>
                                 </template>
@@ -91,6 +92,16 @@
                     maxPlayers: 1,
                     showOnList: false
                 }
+            }
+        },
+        methods: {
+            createRoom() {
+                this.$router.push('/room');
+            }
+        },
+        computed: {
+            disableCreateButton: function () {
+                return !this.roomSettings.name;
             }
         }
     }

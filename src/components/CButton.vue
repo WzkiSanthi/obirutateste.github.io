@@ -33,6 +33,7 @@
     .btn-gradient-04:disabled,
     .btn-gradient-05:disabled {
         background: #010101;
-        opacity: 0.15
+        opacity: 0.15;
+        cursor: default;
     }
 </style>
