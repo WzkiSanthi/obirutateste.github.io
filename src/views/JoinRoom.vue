@@ -13,7 +13,8 @@
                                         <table class="table mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 100%">Name</th>
+                                                    <th></th>
+                                                    <th style="width: 100%">Name Room</th>
                                                     <th>Players</th>
                                                     <th>Pass</th>
                                                     <th>Distance</th>
@@ -21,12 +22,10 @@
                                             </thead>
                                             <tbody>
                                                 <tr v-for="room in rooms" class="rooms">
-                                                <td><div style="display: flex" class="align-items-center">
-                                                 <span v-if="$store.getters.USER">
-                                                    <img :src="$store.getters.USER.photoURL" alt="..." style="width: 32px;" class="avatar rounded-circle d-block mx-auto"> </span>
-                                                    <span style="margin-left: 8px">{{room.name}}</span>
-                                                           </div></td>
-                                                    <td>{{room.players}}</td>
+                                                <td style="padding-right: 0" v-if="$store.getters.USER">
+                                                    <img  :src="$store.getters.USER.photoURL" alt="..." style="width: 32px;" ata-toggle="tooltip" data-placement="top" title="Tooltip Title"class="avatar rounded-circle d-block mx-auto"></td>
+                                                    <td>{{room.name}}</td>
+                                                     <td>{{room.players}}</td>
                                                     <td><span :class="[room.pass ? 'badge-text badge-text-small success ' : 'badge-text badge-text-small danger']">{{ room.pass ? 'Yes' : 'No'}}</span></td>
                                                     <td>{{room.distance}}</td>
                                                 </tr>
@@ -66,13 +65,20 @@
     a {
         cursor: pointer
     }
+    
+
 
     .rooms td {
         text-transform: capitalize;
-    }
+        
+       
+      }
 
     .rooms:hover {
         cursor: pointer;
-        background: #5d53864d;
+        color: white;
+        background: linear-gradient(to right, rgba(211, 52, 111, 0.9) 0%,#4D93BF  100%)
+
+        
     }
 </style>
