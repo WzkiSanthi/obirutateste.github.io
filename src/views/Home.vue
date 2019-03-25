@@ -37,7 +37,7 @@
     import Tile4 from '../assets/tile-4.jpg';
 
     export default {
-        name: 'menuJogo',
+        name: 'home',
         components: {
             HeaderBar, Card
         },

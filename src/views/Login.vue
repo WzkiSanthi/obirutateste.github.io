@@ -10,7 +10,7 @@
                         </div>
                         <div style="margin: 4em 0">
                             <div class="text-center text-gradient-01 brand-style"
-                                style="font-size: 2.5em;margin-bottom: 4px">soccerrush</div>
+                                style="font-size: 2.5em;margin-bottom: 4px">vuxball</div>
                             <div class="em-separator separator-dashed" style="margin: 0px 0 12px 0"></div>
                             <h4 style="margin-top: 4px" class="text-center">Log in with social networks</h4>
                             <div>

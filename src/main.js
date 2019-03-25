@@ -1,9 +1,11 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store';
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store/mainStore';
+import axios from 'axios';
 
-Vue.config.productionTip = false
+Vue.prototype.$http = axios;
+Vue.config.productionTip = false;
 
 store.dispatch('auth_state_change');
 new Vue({

@@ -96,7 +96,14 @@
         },
         methods: {
             createRoom() {
-                this.$router.push('/room');
+                this.$store.dispatch('set_loading', 'Connecting...');
+                this.$http.get('https://ipinfo.io').then((payload) => {
+                    let location = payload.data;
+                    this.$router.push('/room');
+                }).catch(() => {
+                    this.$store.dispatch('set_unloading');
+                    this.$store.dispatch('set_error', "Couldn't connect with the server!");
+                });
             }
         },
         computed: {

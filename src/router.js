@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Login from './views/Login'
 import NotFoundPage from './views/NotFoundPage'
 import CreateUser from './views/CreateUser'
-import MenuJogo from './views/MenuJogo'
+import Home from './views/Home'
 import Profile from './views/Profile'
 import CreateRoom from './views/CreateRoom'
 import JoinRoom from './views/JoinRoom'
@@ -32,43 +32,43 @@ const router = new Router({
         {
             path: '/login',
             name: 'login',
-            meta: { title: 'SOCCERRUSH - Log In' },
+            meta: { title: 'VUXBALL - Log In' },
             component: Login
         },
         {
             path: '/create-user',
             name: 'createUser',
-            meta: { title: 'SOCCERRUSH - Create User' },
+            meta: { title: 'VUXBALL - Create User' },
             component: CreateUser
         },
         {
             path: '/home',
             name: 'home',
-            meta: { title: 'SOCCERRUSH' },
-            component: MenuJogo
+            meta: { title: 'VUXBALL' },
+            component: Home
         },
         {
             path: '/profile',
             name: 'profile',
-            meta: { title: 'SOCCERRUSH - Profile' },
+            meta: { title: 'VUXBALL - Profile' },
             component: Profile
         },
         {
             path: '/create-room',
             name: 'createRoom',
-            meta: { title: 'SOCCERRUSH - Create Room' },
+            meta: { title: 'VUXBALL - Create Room' },
             component: CreateRoom
         },
         {
             path: '/join-room',
             name: 'joinRoom',
-            meta: { title: 'SOCCERRUSH - Join Room' },
+            meta: { title: 'VUXBALL - Join Room' },
             component: JoinRoom
         },
         {
             path: '/room',
             name: 'room',
-            meta: { title: 'SOCCERRUSH - Room' },
+            meta: { title: 'VUXBALL - Room' },
             component: Room
         }
     ]

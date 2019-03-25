@@ -20,7 +20,7 @@
                             <router-link to="/">
                                 <div class="navbar-header" style="margin-left: 100px">
                                     <div class="navbar-brand">
-                                        <div class="text-gradient-01 brand-style">soccerrush</div>
+                                        <div class="text-gradient-01 brand-style">vuxball</div>
                                     </div>
                                 </div>
                             </router-link>

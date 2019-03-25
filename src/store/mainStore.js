@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Router from 'vue-router'
+import socketStore from './socketStore';
 
-Vue.use(Router)
 Vue.use(Vuex)
 
 //CÓDIGOS DE ERRO
@@ -12,6 +11,9 @@ const CODE = {
 }
 
 var store = new Vuex.Store({
+    modules: {
+        socketStore: socketStore
+    },
     state: {
         user: null,
         nickname: null,
@@ -111,6 +113,9 @@ var store = new Vuex.Store({
                     console.log(CODE['0'].message);
                 });
             });
+        },
+        set_error(context, message) {
+            UIkit.notification(message, { pos: 'bottom-center', status: 'danger' });
         }
     }
 })
